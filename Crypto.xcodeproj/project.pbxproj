@@ -9,13 +9,25 @@
 /* Begin PBXBuildFile section */
 		712E00B129256EAA00F6998F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00B029256EAA00F6998F /* AppDelegate.swift */; };
 		712E00B329256EAA00F6998F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00B229256EAA00F6998F /* SceneDelegate.swift */; };
-		712E00B529256EAA00F6998F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00B429256EAA00F6998F /* ViewController.swift */; };
-		712E00B829256EAA00F6998F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 712E00B629256EAA00F6998F /* Main.storyboard */; };
 		712E00BA29256EAC00F6998F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 712E00B929256EAC00F6998F /* Assets.xcassets */; };
 		712E00BD29256EAC00F6998F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 712E00BB29256EAC00F6998F /* LaunchScreen.storyboard */; };
 		712E00C829256EAC00F6998F /* CryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00C729256EAC00F6998F /* CryptoTests.swift */; };
 		712E00D229256EAC00F6998F /* CryptoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00D129256EAC00F6998F /* CryptoUITests.swift */; };
 		712E00D429256EAC00F6998F /* CryptoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00D329256EAC00F6998F /* CryptoUITestsLaunchTests.swift */; };
+		712E00E5292571B700F6998F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00E4292571B700F6998F /* Endpoint.swift */; };
+		712E00E7292571C800F6998F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00E6292571C800F6998F /* HTTPClient.swift */; };
+		712E00E9292571D500F6998F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00E8292571D500F6998F /* HTTPMethod.swift */; };
+		712E00EB2925724D00F6998F /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00EA2925724D00F6998F /* RequestError.swift */; };
+		712E00EE2925727100F6998F /* CryptoEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00ED2925727100F6998F /* CryptoEndpoint.swift */; };
+		712E00F12925729900F6998F /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00F02925729900F6998F /* CryptoService.swift */; };
+		712E00F429257EE600F6998F /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712E00F329257EE600F6998F /* CoinModel.swift */; };
+		714CD7EC29258694005F4CF4 /* MarketListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7E629258694005F4CF4 /* MarketListPresenter.swift */; };
+		714CD7ED29258694005F4CF4 /* MarketListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7E729258694005F4CF4 /* MarketListWorker.swift */; };
+		714CD7EE29258694005F4CF4 /* MarketListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7E829258694005F4CF4 /* MarketListRouter.swift */; };
+		714CD7EF29258694005F4CF4 /* MarketListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7E929258694005F4CF4 /* MarketListModels.swift */; };
+		714CD7F029258694005F4CF4 /* MarketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7EA29258694005F4CF4 /* MarketListViewController.swift */; };
+		714CD7F129258694005F4CF4 /* MarketListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7EB29258694005F4CF4 /* MarketListInteractor.swift */; };
+		714CD7F329258739005F4CF4 /* MarketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7F229258739005F4CF4 /* MarketListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +51,6 @@
 		712E00AD29256EAA00F6998F /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		712E00B029256EAA00F6998F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		712E00B229256EAA00F6998F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		712E00B429256EAA00F6998F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		712E00B729256EAA00F6998F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		712E00B929256EAC00F6998F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		712E00BC29256EAC00F6998F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		712E00BE29256EAC00F6998F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +59,20 @@
 		712E00CD29256EAC00F6998F /* CryptoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		712E00D129256EAC00F6998F /* CryptoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUITests.swift; sourceTree = "<group>"; };
 		712E00D329256EAC00F6998F /* CryptoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		712E00E4292571B700F6998F /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		712E00E6292571C800F6998F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		712E00E8292571D500F6998F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		712E00EA2925724D00F6998F /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		712E00ED2925727100F6998F /* CryptoEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoEndpoint.swift; sourceTree = "<group>"; };
+		712E00F02925729900F6998F /* CryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoService.swift; sourceTree = "<group>"; };
+		712E00F329257EE600F6998F /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
+		714CD7E629258694005F4CF4 /* MarketListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListPresenter.swift; sourceTree = "<group>"; };
+		714CD7E729258694005F4CF4 /* MarketListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListWorker.swift; sourceTree = "<group>"; };
+		714CD7E829258694005F4CF4 /* MarketListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListRouter.swift; sourceTree = "<group>"; };
+		714CD7E929258694005F4CF4 /* MarketListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListModels.swift; sourceTree = "<group>"; };
+		714CD7EA29258694005F4CF4 /* MarketListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListViewController.swift; sourceTree = "<group>"; };
+		714CD7EB29258694005F4CF4 /* MarketListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListInteractor.swift; sourceTree = "<group>"; };
+		714CD7F229258739005F4CF4 /* MarketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +123,11 @@
 		712E00AF29256EAA00F6998F /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
-				712E00B029256EAA00F6998F /* AppDelegate.swift */,
-				712E00B229256EAA00F6998F /* SceneDelegate.swift */,
-				712E00B429256EAA00F6998F /* ViewController.swift */,
-				712E00B629256EAA00F6998F /* Main.storyboard */,
-				712E00B929256EAC00F6998F /* Assets.xcassets */,
-				712E00BB29256EAC00F6998F /* LaunchScreen.storyboard */,
-				712E00BE29256EAC00F6998F /* Info.plist */,
+				712E00E029256FF900F6998F /* App */,
+				712E00E12925700300F6998F /* Resources */,
+				712E00E22925717C00F6998F /* NetworkLayer */,
+				714CD8012925898F005F4CF4 /* Core */,
+				714CD7E529258608005F4CF4 /* Scenes */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -125,6 +147,100 @@
 				712E00D329256EAC00F6998F /* CryptoUITestsLaunchTests.swift */,
 			);
 			path = CryptoUITests;
+			sourceTree = "<group>";
+		};
+		712E00E029256FF900F6998F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				712E00B029256EAA00F6998F /* AppDelegate.swift */,
+				712E00B229256EAA00F6998F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		712E00E12925700300F6998F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				712E00BB29256EAC00F6998F /* LaunchScreen.storyboard */,
+				712E00BE29256EAC00F6998F /* Info.plist */,
+				712E00B929256EAC00F6998F /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		712E00E22925717C00F6998F /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				712E00E3292571A600F6998F /* Base */,
+				712E00EC2925725800F6998F /* Endpoints */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		712E00E3292571A600F6998F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				712E00E4292571B700F6998F /* Endpoint.swift */,
+				712E00E6292571C800F6998F /* HTTPClient.swift */,
+				712E00E8292571D500F6998F /* HTTPMethod.swift */,
+				712E00EA2925724D00F6998F /* RequestError.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		712E00EC2925725800F6998F /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				712E00ED2925727100F6998F /* CryptoEndpoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		712E00EF2925728000F6998F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				712E00F02925729900F6998F /* CryptoService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		712E00F229257EBA00F6998F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				712E00F329257EE600F6998F /* CoinModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		714CD7E529258608005F4CF4 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				714CD7F429258874005F4CF4 /* MarketList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		714CD7F429258874005F4CF4 /* MarketList */ = {
+			isa = PBXGroup;
+			children = (
+				714CD7E629258694005F4CF4 /* MarketListPresenter.swift */,
+				714CD7E729258694005F4CF4 /* MarketListWorker.swift */,
+				714CD7E829258694005F4CF4 /* MarketListRouter.swift */,
+				714CD7E929258694005F4CF4 /* MarketListModels.swift */,
+				714CD7EA29258694005F4CF4 /* MarketListViewController.swift */,
+				714CD7EB29258694005F4CF4 /* MarketListInteractor.swift */,
+				714CD7F229258739005F4CF4 /* MarketListView.swift */,
+			);
+			path = MarketList;
+			sourceTree = "<group>";
+		};
+		714CD8012925898F005F4CF4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				712E00EF2925728000F6998F /* Services */,
+				712E00F229257EBA00F6998F /* Models */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +349,6 @@
 			files = (
 				712E00BD29256EAC00F6998F /* LaunchScreen.storyboard in Resources */,
 				712E00BA29256EAC00F6998F /* Assets.xcassets in Resources */,
-				712E00B829256EAA00F6998F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,8 +373,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				712E00B529256EAA00F6998F /* ViewController.swift in Sources */,
+				714CD7F129258694005F4CF4 /* MarketListInteractor.swift in Sources */,
+				712E00F12925729900F6998F /* CryptoService.swift in Sources */,
+				712E00EE2925727100F6998F /* CryptoEndpoint.swift in Sources */,
+				714CD7EE29258694005F4CF4 /* MarketListRouter.swift in Sources */,
 				712E00B129256EAA00F6998F /* AppDelegate.swift in Sources */,
+				714CD7ED29258694005F4CF4 /* MarketListWorker.swift in Sources */,
+				712E00E5292571B700F6998F /* Endpoint.swift in Sources */,
+				714CD7EF29258694005F4CF4 /* MarketListModels.swift in Sources */,
+				712E00EB2925724D00F6998F /* RequestError.swift in Sources */,
+				712E00E7292571C800F6998F /* HTTPClient.swift in Sources */,
+				714CD7F329258739005F4CF4 /* MarketListView.swift in Sources */,
+				712E00E9292571D500F6998F /* HTTPMethod.swift in Sources */,
+				714CD7F029258694005F4CF4 /* MarketListViewController.swift in Sources */,
+				712E00F429257EE600F6998F /* CoinModel.swift in Sources */,
+				714CD7EC29258694005F4CF4 /* MarketListPresenter.swift in Sources */,
 				712E00B329256EAA00F6998F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,14 +425,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		712E00B629256EAA00F6998F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				712E00B729256EAA00F6998F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		712E00BB29256EAC00F6998F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +540,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -439,12 +559,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWCMRP2WBF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Crypto/Info.plist;
+				INFOPLIST_FILE = Crypto/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,6 +573,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.Crypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -467,12 +591,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWCMRP2WBF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Crypto/Info.plist;
+				INFOPLIST_FILE = Crypto/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,6 +605,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.Crypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
