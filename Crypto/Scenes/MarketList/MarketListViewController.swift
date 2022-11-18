@@ -8,28 +8,19 @@
 import UIKit
 
 protocol MarketListDisplayLogic: AnyObject {
-    
+    func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel)
 }
 
 final class MarketListViewController: UIViewController {
     
-    // MARK: - UI Outlets
-    
-    //
-    
-    // MARK: - Public Properties
-    
+    // MARK: - Properties
     var interactor: MarketListBusinessLogic?
     var router: (MarketListRoutingLogic & MarketListDataPassing)?
     
-    lazy var contentView: MarketListViewLogic = MarketListView()
-    
-    // MARK: - Private Properties
-    
-    //
+    private lazy var contentView: MarketListViewLogic = MarketListView()
+    private let searchController = UISearchController()
     
     // MARK: - Init
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -40,6 +31,7 @@ final class MarketListViewController: UIViewController {
         setup()
     }
     
+    // MARK: - Setup
     private func setup() {
         let interactor = MarketListInteractor()
         let presenter = MarketListPresenter()
@@ -55,37 +47,35 @@ final class MarketListViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    
     override func loadView() {
         view = contentView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        setupNavigationItems()
+        Task {
+            await showMarketList()
+        }
     }
-    
-    // MARK: - Public Methods
-    
-    //
-    
-    // MARK: - Requests
-    
-    //
     
     // MARK: - Private Methods
-    
-    private func configure() {
-        
+    private func setupNavigationItems() {
+        title = "Crypto"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    // MARK: - UI Actions
-    
-    //
+    private func showMarketList() async {
+        let request = MarketListModels.FetchCoins.Request(page: 1)
+        
+        await interactor?.fetchMarketList(with: request)
+    }
 }
 
 // MARK: - Display Logic
-
 extension MarketListViewController: MarketListDisplayLogic {
-    
+    func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel) {
+        contentView.configure(with: viewModel.marketListCellModel)
+    }
 }

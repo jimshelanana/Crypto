@@ -13,6 +13,7 @@ enum RequestError: Error {
     case noResponse
     case unAuthorized
     case unexpectedStatusCode
+    case imageDownloadFailed
     case unknown
     
     var customMessage: String {

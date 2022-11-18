@@ -10,11 +10,12 @@ import Foundation
 import Foundation
 
 protocol CryptoServiceable {
-    func getMarkets() async -> Result<CoinModel, RequestError>
+    func getMarkets(coinRequestModel: CoinRequestModel) async -> Result<[CoinModel], RequestError>
 }
 
 struct CryptoService: HTTPClient, CryptoServiceable {
-    func getMarkets() async -> Result<CoinModel, RequestError> {
-        return await sendRequest(endpoint: CryptoEndpoint.markets, responseModel: CoinModel.self)
+    func getMarkets(coinRequestModel: CoinRequestModel) async -> Result<[CoinModel], RequestError> {
+        return await sendRequest(endpoint: CryptoEndpoint.markets(coinRequestModel),
+                                 responseModel: [CoinModel].self)
     }
 }

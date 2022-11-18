@@ -8,7 +8,7 @@
 import Foundation
 
 enum CryptoEndpoint {
-    case markets
+    case markets(CoinRequestModel)
 }
 
 extension CryptoEndpoint: Endpoint {
@@ -30,6 +30,18 @@ extension CryptoEndpoint: Endpoint {
         switch self {
         case .markets:
             return ["Content-Type": "application/json;charset=utf-8"]
+        }
+    }
+    
+    var query: [String : Any]? {
+        switch self {
+        case .markets(let model):
+            return ["vs_currency": model.vsCurrency,
+                    "order": model.order,
+                    "per_page": "\(model.perPage)",
+                    "page": "\(model.page)",
+                    "current_price": model.vsCurrency,
+                    "price_change_percentage": model.priceChangePercentage]
         }
     }
     

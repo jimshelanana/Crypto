@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MarketListBusinessLogic {
-    
+    func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async
 }
 
 protocol MarketListDataStore {
@@ -17,16 +17,19 @@ protocol MarketListDataStore {
 
 final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
     
-    // MARK: - Public Properties
-    
+    // MARK: - Properties
     var presenter: MarketListPresentationLogic?
     lazy var worker: MarketListWorkingLogic = MarketListWorker()
     
-    // MARK: - Private Properties
-    
-    //
-    
     // MARK: - Business Logic
-    
-    //
+    func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async {
+        let marketList = await worker.fetchMarketList(with: request)
+        switch marketList {
+        case .success(let data):
+            let model = MarketListModels.FetchCoins.Response(list: data)
+            presenter?.presentData(model)
+        case .failure(_):
+            break
+        }
+    }
 }

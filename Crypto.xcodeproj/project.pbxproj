@@ -28,6 +28,11 @@
 		714CD7F029258694005F4CF4 /* MarketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7EA29258694005F4CF4 /* MarketListViewController.swift */; };
 		714CD7F129258694005F4CF4 /* MarketListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7EB29258694005F4CF4 /* MarketListInteractor.swift */; };
 		714CD7F329258739005F4CF4 /* MarketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD7F229258739005F4CF4 /* MarketListView.swift */; };
+		714CD81B292655BD005F4CF4 /* CoinRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD81A292655BD005F4CF4 /* CoinRequestModel.swift */; };
+		714CD81E292679B8005F4CF4 /* MarketListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD81D292679B8005F4CF4 /* MarketListCell.swift */; };
+		7170B4E62927F314006F03A7 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4E52927F314006F03A7 /* ImageStore.swift */; };
+		7170B4E92927FE8B006F03A7 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4E82927FE8B006F03A7 /* Double+Extension.swift */; };
+		71D7B3E52927C742006CE6C4 /* ImageLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7B3E42927C742006CE6C4 /* ImageLoadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +78,11 @@
 		714CD7EA29258694005F4CF4 /* MarketListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListViewController.swift; sourceTree = "<group>"; };
 		714CD7EB29258694005F4CF4 /* MarketListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListInteractor.swift; sourceTree = "<group>"; };
 		714CD7F229258739005F4CF4 /* MarketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListView.swift; sourceTree = "<group>"; };
+		714CD81A292655BD005F4CF4 /* CoinRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRequestModel.swift; sourceTree = "<group>"; };
+		714CD81D292679B8005F4CF4 /* MarketListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListCell.swift; sourceTree = "<group>"; };
+		7170B4E52927F314006F03A7 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		7170B4E82927FE8B006F03A7 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		71D7B3E42927C742006CE6C4 /* ImageLoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +138,7 @@
 				712E00E22925717C00F6998F /* NetworkLayer */,
 				714CD8012925898F005F4CF4 /* Core */,
 				714CD7E529258608005F4CF4 /* Scenes */,
+				7170B4E72927FE78006F03A7 /* Helpers */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -200,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				712E00F02925729900F6998F /* CryptoService.swift */,
+				71D7B3E42927C742006CE6C4 /* ImageLoadService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -207,6 +219,7 @@
 		712E00F229257EBA00F6998F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				714CD81929265538005F4CF4 /* Requests */,
 				712E00F329257EE600F6998F /* CoinModel.swift */,
 			);
 			path = Models;
@@ -223,6 +236,7 @@
 		714CD7F429258874005F4CF4 /* MarketList */ = {
 			isa = PBXGroup;
 			children = (
+				714CD81C2926799B005F4CF4 /* MarketListCell */,
 				714CD7E629258694005F4CF4 /* MarketListPresenter.swift */,
 				714CD7E729258694005F4CF4 /* MarketListWorker.swift */,
 				714CD7E829258694005F4CF4 /* MarketListRouter.swift */,
@@ -237,10 +251,43 @@
 		714CD8012925898F005F4CF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7170B4E42927F303006F03A7 /* Stores */,
 				712E00EF2925728000F6998F /* Services */,
 				712E00F229257EBA00F6998F /* Models */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		714CD81929265538005F4CF4 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				714CD81A292655BD005F4CF4 /* CoinRequestModel.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		714CD81C2926799B005F4CF4 /* MarketListCell */ = {
+			isa = PBXGroup;
+			children = (
+				714CD81D292679B8005F4CF4 /* MarketListCell.swift */,
+			);
+			path = MarketListCell;
+			sourceTree = "<group>";
+		};
+		7170B4E42927F303006F03A7 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				7170B4E52927F314006F03A7 /* ImageStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		7170B4E72927FE78006F03A7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7170B4E82927FE8B006F03A7 /* Double+Extension.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,18 +422,23 @@
 			files = (
 				714CD7F129258694005F4CF4 /* MarketListInteractor.swift in Sources */,
 				712E00F12925729900F6998F /* CryptoService.swift in Sources */,
+				7170B4E92927FE8B006F03A7 /* Double+Extension.swift in Sources */,
 				712E00EE2925727100F6998F /* CryptoEndpoint.swift in Sources */,
+				7170B4E62927F314006F03A7 /* ImageStore.swift in Sources */,
 				714CD7EE29258694005F4CF4 /* MarketListRouter.swift in Sources */,
 				712E00B129256EAA00F6998F /* AppDelegate.swift in Sources */,
 				714CD7ED29258694005F4CF4 /* MarketListWorker.swift in Sources */,
 				712E00E5292571B700F6998F /* Endpoint.swift in Sources */,
+				714CD81E292679B8005F4CF4 /* MarketListCell.swift in Sources */,
 				714CD7EF29258694005F4CF4 /* MarketListModels.swift in Sources */,
 				712E00EB2925724D00F6998F /* RequestError.swift in Sources */,
+				714CD81B292655BD005F4CF4 /* CoinRequestModel.swift in Sources */,
 				712E00E7292571C800F6998F /* HTTPClient.swift in Sources */,
 				714CD7F329258739005F4CF4 /* MarketListView.swift in Sources */,
 				712E00E9292571D500F6998F /* HTTPMethod.swift in Sources */,
 				714CD7F029258694005F4CF4 /* MarketListViewController.swift in Sources */,
 				712E00F429257EE600F6998F /* CoinModel.swift in Sources */,
+				71D7B3E52927C742006CE6C4 /* ImageLoadService.swift in Sources */,
 				714CD7EC29258694005F4CF4 /* MarketListPresenter.swift in Sources */,
 				712E00B329256EAA00F6998F /* SceneDelegate.swift in Sources */,
 			);
