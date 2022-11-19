@@ -9,26 +9,32 @@ import UIKit
 
 protocol MarketListPresentationLogic {
     func presentData(_ response: MarketListModels.FetchCoins.Response)
+    func presentPrefetchedData(_ response: MarketListModels.FetchCoins.Response)
 }
 
 final class MarketListPresenter: MarketListPresentationLogic {
+    
+    typealias MarketListCellModel = MarketListModels.FetchCoins.MarketListCellModel
+    
     // MARK: - Properties
     weak var viewController: MarketListDisplayLogic?
-
+    
     // MARK: - Presentation Logic
     func presentData(_ response: MarketListModels.FetchCoins.Response) {
-        var marketListCellModel = [MarketListModels.FetchCoins.MarketListCellModel]()
-        
-        response.list.forEach { model in
-            let cellModel = setupMarketListCellModel(from: model)
-            marketListCellModel.append(cellModel)
-        }
-        
-        viewController?.displayMarketList(MarketListModels.FetchCoins.ViewModel(marketListCellModel: marketListCellModel))
+        viewController?.displayMarketList(MarketListModels.FetchCoins.ViewModel(marketListCellModel:
+                                                                                    getMarketListCellModel(response.list)))
     }
     
-    private func setupMarketListCellModel(from model: CoinModel) -> MarketListModels.FetchCoins.MarketListCellModel {
-        return MarketListModels.FetchCoins.MarketListCellModel(
+    func presentPrefetchedData(_ response: MarketListModels.FetchCoins.Response) {
+        viewController?.displayPrefetchedMarketList(MarketListModels.FetchCoins.ViewModel(marketListCellModel: getMarketListCellModel(response.list)))
+    }
+    
+    private func getMarketListCellModel(_ coinModel: [CoinModel]) -> [MarketListCellModel] {
+        coinModel.map { setupMarketListCellModel(from: $0) }
+    }
+    
+    private func setupMarketListCellModel(from model: CoinModel) -> MarketListCellModel {
+        return MarketListCellModel(
             id: model.id ?? "",
             symbol: model.symbol?.uppercased() ?? "",
             name: model.name ?? "",

@@ -9,11 +9,18 @@ import UIKit
 
 protocol MarketListViewLogic: UIView {
     func configure(with model: [MarketListModels.FetchCoins.MarketListCellModel])
+    func updateModel(with prefetchedItems: [MarketListModels.FetchCoins.MarketListCellModel])
 }
 
 final class MarketListView: UIView {
     
-    private var model = [MarketListModels.FetchCoins.MarketListCellModel]()
+    typealias CellModel = [MarketListModels.FetchCoins.MarketListCellModel]
+    
+    // MARK: - Properties
+    private var parentViewController: MarketListViewController?
+    private var model = CellModel()
+    private var marketListPage = 1
+    private var isLoadingData = true
     
     // MARK: - Views    
     private let tableView: UITableView = {
@@ -30,6 +37,11 @@ final class MarketListView: UIView {
     override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
         setup()
+    }
+    
+    convenience init(parentViewController: MarketListViewController) {
+        self.init()
+        self.parentViewController = parentViewController
     }
     
     required init?(coder _: NSCoder) {
@@ -70,9 +82,18 @@ final class MarketListView: UIView {
 
 // MARK: - MarketListViewLogic
 extension MarketListView: MarketListViewLogic {
-    func configure(with model: [MarketListModels.FetchCoins.MarketListCellModel]) {
+    func configure(with model: CellModel) {
         self.model = model
         DispatchQueue.main.async {
+            self.isLoadingData = false
+            self.tableView.reloadData()
+        }
+    }
+    
+    func updateModel(with prefetchedItems: CellModel) {
+        model.append(contentsOf: prefetchedItems)
+        DispatchQueue.main.async {
+            self.isLoadingData = false
             self.tableView.reloadData()
         }
     }
@@ -95,5 +116,14 @@ extension MarketListView: UITableViewDataSource {
 
 // MARK: - TableView Delegate
 extension MarketListView: UITableViewDelegate {
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > tableView.contentSize.height - 100 - scrollView.frame.size.height && isLoadingData == false {
+            marketListPage += 1
+            isLoadingData = true
+            Task {
+                await parentViewController?.startPrefetching(for: marketListPage)
+            }
+        }
+    }
 }

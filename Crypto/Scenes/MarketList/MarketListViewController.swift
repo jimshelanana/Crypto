@@ -9,6 +9,7 @@ import UIKit
 
 protocol MarketListDisplayLogic: AnyObject {
     func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel)
+    func displayPrefetchedMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel)
 }
 
 final class MarketListViewController: UIViewController {
@@ -17,7 +18,7 @@ final class MarketListViewController: UIViewController {
     var interactor: MarketListBusinessLogic?
     var router: (MarketListRoutingLogic & MarketListDataPassing)?
     
-    private lazy var contentView: MarketListViewLogic = MarketListView()
+    private lazy var contentView: MarketListViewLogic = MarketListView(parentViewController: self)
     private let searchController = UISearchController()
     
     // MARK: - Init
@@ -59,6 +60,10 @@ final class MarketListViewController: UIViewController {
         }
     }
     
+    func startPrefetching(for page: Int) async {
+        await interactor?.prefetchMarketList(with: MarketListModels.FetchCoins.Request(page: page))
+    }
+    
     // MARK: - Private Methods
     private func setupNavigationItems() {
         title = "Crypto"
@@ -77,5 +82,9 @@ final class MarketListViewController: UIViewController {
 extension MarketListViewController: MarketListDisplayLogic {
     func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel) {
         contentView.configure(with: viewModel.marketListCellModel)
+    }
+    
+    func displayPrefetchedMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel) {
+        contentView.updateModel(with: viewModel.marketListCellModel)
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 protocol MarketListBusinessLogic {
     func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async
+    func prefetchMarketList(with request: MarketListModels.FetchCoins.Request) async
 }
 
 protocol MarketListDataStore {
@@ -23,13 +24,23 @@ final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
     
     // MARK: - Business Logic
     func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async {
+        guard let response = await getMarketList(for: request) else { return }
+        presenter?.presentData(response)
+    }
+    
+    func prefetchMarketList(with request: MarketListModels.FetchCoins.Request) async {
+        guard let response = await getMarketList(for: request) else { return }
+        presenter?.presentPrefetchedData(response)
+    }
+    
+    private func getMarketList(for request: MarketListModels.FetchCoins.Request) async -> MarketListModels.FetchCoins.Response? {
         let marketList = await worker.fetchMarketList(with: request)
         switch marketList {
         case .success(let data):
-            let model = MarketListModels.FetchCoins.Response(list: data)
-            presenter?.presentData(model)
+            return MarketListModels.FetchCoins.Response(list: data)
         case .failure(_):
-            break
+            //TODO: Errorhandling
+            return nil
         }
     }
 }

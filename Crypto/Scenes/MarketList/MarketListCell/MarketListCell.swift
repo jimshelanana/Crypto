@@ -70,6 +70,16 @@ final class MarketListCell: UITableViewCell {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - LifeCycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        coinTitleLabel.text = nil
+        coinSymbolLabel.text = nil
+        coinPriceLabel.text = nil
+        coinPriceChangeLabel.text = nil
+        coinIcon.image = nil
+    }
 
     // MARK: - Setup
     private func setup() {
