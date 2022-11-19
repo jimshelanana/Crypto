@@ -1,26 +1,23 @@
 //
-//  MarketListView.swift
+//  SearchMarketListView.swift
 //  Crypto
 //
-//  Created by Nana Jimsheleishvili on 17.11.22.
+//  Created by Nana Jimsheleishvili on 19.11.22.
 //
 
 import UIKit
 
-protocol MarketListViewLogic: UIView {
+protocol SearchMarketListViewLogic: UIView {
     func configure(with model: [MarketListCellModel])
-    func updateModel(with prefetchedItems: [MarketListCellModel])
 }
 
-final class MarketListView: UIView {
+final class SearchMarketListView: UIView {
     
     // MARK: - Properties
-    private var parentViewController: MarketListViewController?
+    private var parentViewController: SearchMarketListViewController?
     private var model = [MarketListCellModel]()
-    private var marketListPage = 1
-    private var isLoadingData = true
     
-    // MARK: - Views    
+    // MARK: - Views
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +34,7 @@ final class MarketListView: UIView {
         setup()
     }
     
-    convenience init(parentViewController: MarketListViewController) {
+    convenience init(parentViewController: SearchMarketListViewController) {
         self.init()
         self.parentViewController = parentViewController
     }
@@ -57,7 +54,7 @@ final class MarketListView: UIView {
     }
     
     private func registerCell() {
-        tableView.register(MarketListCell.self, forCellReuseIdentifier: "MarketListCell")
+        tableView.register(SearchMarketListCell.self, forCellReuseIdentifier: "SearchMarketListCell")
     }
     
     private func setupUI() {
@@ -79,32 +76,23 @@ final class MarketListView: UIView {
 }
 
 // MARK: - MarketListViewLogic
-extension MarketListView: MarketListViewLogic {
+extension SearchMarketListView: SearchMarketListViewLogic {
     func configure(with model: [MarketListCellModel]) {
         self.model = model
         DispatchQueue.main.async {
-            self.isLoadingData = false
-            self.tableView.reloadData()
-        }
-    }
-    
-    func updateModel(with prefetchedItems: [MarketListCellModel]) {
-        model.append(contentsOf: prefetchedItems)
-        DispatchQueue.main.async {
-            self.isLoadingData = false
             self.tableView.reloadData()
         }
     }
 }
 
 // MARK: - TableView DataSource
-extension MarketListView: UITableViewDataSource {
+extension SearchMarketListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "MarketListCell") as? MarketListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SearchMarketListCell") as? SearchMarketListCell {
             cell.configure(with: model[indexPath.row])
             return cell
         }
@@ -113,19 +101,6 @@ extension MarketListView: UITableViewDataSource {
 }
 
 // MARK: - TableView Delegate
-extension MarketListView: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y
-        if position > tableView.contentSize.height - 100 - scrollView.frame.size.height && isLoadingData == false {
-            marketListPage += 1
-            isLoadingData = true
-            Task {
-                await parentViewController?.startPrefetching(for: marketListPage)
-            }
-        }
-    }
+extension SearchMarketListView: UITableViewDelegate {
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        parentViewController?.tableViewDidStartScrolling()
-    }
 }

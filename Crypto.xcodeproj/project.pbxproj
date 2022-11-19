@@ -32,6 +32,16 @@
 		714CD81E292679B8005F4CF4 /* MarketListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CD81D292679B8005F4CF4 /* MarketListCell.swift */; };
 		7170B4E62927F314006F03A7 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4E52927F314006F03A7 /* ImageStore.swift */; };
 		7170B4E92927FE8B006F03A7 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4E82927FE8B006F03A7 /* Double+Extension.swift */; };
+		7170B4EB29292079006F03A7 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4EA29292079006F03A7 /* SearchModel.swift */; };
+		7170B4ED29292696006F03A7 /* MarketListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4EC29292696006F03A7 /* MarketListCellModel.swift */; };
+		7170B4F529293F1F006F03A7 /* SearchMarketListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4EF29293F1F006F03A7 /* SearchMarketListPresenter.swift */; };
+		7170B4F629293F1F006F03A7 /* SearchMarketListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4F029293F1F006F03A7 /* SearchMarketListWorker.swift */; };
+		7170B4F729293F1F006F03A7 /* SearchMarketListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4F129293F1F006F03A7 /* SearchMarketListRouter.swift */; };
+		7170B4F829293F1F006F03A7 /* SearchMarketListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4F229293F1F006F03A7 /* SearchMarketListModels.swift */; };
+		7170B4F929293F1F006F03A7 /* SearchMarketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4F329293F1F006F03A7 /* SearchMarketListViewController.swift */; };
+		7170B4FA29293F1F006F03A7 /* SearchMarketListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4F429293F1F006F03A7 /* SearchMarketListInteractor.swift */; };
+		7170B4FC292942DE006F03A7 /* SearchMarketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4FB292942DE006F03A7 /* SearchMarketListView.swift */; };
+		7170B4FE292942ED006F03A7 /* SearchMarketListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170B4FD292942ED006F03A7 /* SearchMarketListCell.swift */; };
 		71D7B3E52927C742006CE6C4 /* ImageLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7B3E42927C742006CE6C4 /* ImageLoadService.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +92,16 @@
 		714CD81D292679B8005F4CF4 /* MarketListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListCell.swift; sourceTree = "<group>"; };
 		7170B4E52927F314006F03A7 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		7170B4E82927FE8B006F03A7 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		7170B4EA29292079006F03A7 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		7170B4EC29292696006F03A7 /* MarketListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketListCellModel.swift; sourceTree = "<group>"; };
+		7170B4EF29293F1F006F03A7 /* SearchMarketListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListPresenter.swift; sourceTree = "<group>"; };
+		7170B4F029293F1F006F03A7 /* SearchMarketListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListWorker.swift; sourceTree = "<group>"; };
+		7170B4F129293F1F006F03A7 /* SearchMarketListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListRouter.swift; sourceTree = "<group>"; };
+		7170B4F229293F1F006F03A7 /* SearchMarketListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListModels.swift; sourceTree = "<group>"; };
+		7170B4F329293F1F006F03A7 /* SearchMarketListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListViewController.swift; sourceTree = "<group>"; };
+		7170B4F429293F1F006F03A7 /* SearchMarketListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListInteractor.swift; sourceTree = "<group>"; };
+		7170B4FB292942DE006F03A7 /* SearchMarketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListView.swift; sourceTree = "<group>"; };
+		7170B4FD292942ED006F03A7 /* SearchMarketListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarketListCell.swift; sourceTree = "<group>"; };
 		71D7B3E42927C742006CE6C4 /* ImageLoadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +241,7 @@
 			children = (
 				714CD81929265538005F4CF4 /* Requests */,
 				712E00F329257EE600F6998F /* CoinModel.swift */,
+				7170B4EA29292079006F03A7 /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,6 +249,7 @@
 		714CD7E529258608005F4CF4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7170B4EE29293ED7006F03A7 /* SearchMarketList */,
 				714CD7F429258874005F4CF4 /* MarketList */,
 			);
 			path = Scenes;
@@ -270,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				714CD81D292679B8005F4CF4 /* MarketListCell.swift */,
+				7170B4EC29292696006F03A7 /* MarketListCellModel.swift */,
 			);
 			path = MarketListCell;
 			sourceTree = "<group>";
@@ -288,6 +311,29 @@
 				7170B4E82927FE8B006F03A7 /* Double+Extension.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7170B4EE29293ED7006F03A7 /* SearchMarketList */ = {
+			isa = PBXGroup;
+			children = (
+				7170B4FF292942F3006F03A7 /* SearchMarketListCell */,
+				7170B4EF29293F1F006F03A7 /* SearchMarketListPresenter.swift */,
+				7170B4F029293F1F006F03A7 /* SearchMarketListWorker.swift */,
+				7170B4F129293F1F006F03A7 /* SearchMarketListRouter.swift */,
+				7170B4F229293F1F006F03A7 /* SearchMarketListModels.swift */,
+				7170B4F329293F1F006F03A7 /* SearchMarketListViewController.swift */,
+				7170B4F429293F1F006F03A7 /* SearchMarketListInteractor.swift */,
+				7170B4FB292942DE006F03A7 /* SearchMarketListView.swift */,
+			);
+			path = SearchMarketList;
+			sourceTree = "<group>";
+		};
+		7170B4FF292942F3006F03A7 /* SearchMarketListCell */ = {
+			isa = PBXGroup;
+			children = (
+				7170B4FD292942ED006F03A7 /* SearchMarketListCell.swift */,
+			);
+			path = SearchMarketListCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,22 +470,32 @@
 				712E00F12925729900F6998F /* CryptoService.swift in Sources */,
 				7170B4E92927FE8B006F03A7 /* Double+Extension.swift in Sources */,
 				712E00EE2925727100F6998F /* CryptoEndpoint.swift in Sources */,
+				7170B4FE292942ED006F03A7 /* SearchMarketListCell.swift in Sources */,
 				7170B4E62927F314006F03A7 /* ImageStore.swift in Sources */,
 				714CD7EE29258694005F4CF4 /* MarketListRouter.swift in Sources */,
 				712E00B129256EAA00F6998F /* AppDelegate.swift in Sources */,
 				714CD7ED29258694005F4CF4 /* MarketListWorker.swift in Sources */,
+				7170B4F529293F1F006F03A7 /* SearchMarketListPresenter.swift in Sources */,
 				712E00E5292571B700F6998F /* Endpoint.swift in Sources */,
 				714CD81E292679B8005F4CF4 /* MarketListCell.swift in Sources */,
 				714CD7EF29258694005F4CF4 /* MarketListModels.swift in Sources */,
+				7170B4ED29292696006F03A7 /* MarketListCellModel.swift in Sources */,
 				712E00EB2925724D00F6998F /* RequestError.swift in Sources */,
 				714CD81B292655BD005F4CF4 /* CoinRequestModel.swift in Sources */,
 				712E00E7292571C800F6998F /* HTTPClient.swift in Sources */,
+				7170B4F929293F1F006F03A7 /* SearchMarketListViewController.swift in Sources */,
 				714CD7F329258739005F4CF4 /* MarketListView.swift in Sources */,
 				712E00E9292571D500F6998F /* HTTPMethod.swift in Sources */,
 				714CD7F029258694005F4CF4 /* MarketListViewController.swift in Sources */,
+				7170B4F829293F1F006F03A7 /* SearchMarketListModels.swift in Sources */,
+				7170B4EB29292079006F03A7 /* SearchModel.swift in Sources */,
+				7170B4F729293F1F006F03A7 /* SearchMarketListRouter.swift in Sources */,
 				712E00F429257EE600F6998F /* CoinModel.swift in Sources */,
 				71D7B3E52927C742006CE6C4 /* ImageLoadService.swift in Sources */,
+				7170B4F629293F1F006F03A7 /* SearchMarketListWorker.swift in Sources */,
 				714CD7EC29258694005F4CF4 /* MarketListPresenter.swift in Sources */,
+				7170B4FA29293F1F006F03A7 /* SearchMarketListInteractor.swift in Sources */,
+				7170B4FC292942DE006F03A7 /* SearchMarketListView.swift in Sources */,
 				712E00B329256EAA00F6998F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

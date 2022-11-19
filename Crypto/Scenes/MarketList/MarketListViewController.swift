@@ -8,8 +8,8 @@
 import UIKit
 
 protocol MarketListDisplayLogic: AnyObject {
-    func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel)
-    func displayPrefetchedMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel)
+    func displayMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
+    func displayPrefetchedMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
 }
 
 final class MarketListViewController: UIViewController {
@@ -19,7 +19,8 @@ final class MarketListViewController: UIViewController {
     var router: (MarketListRoutingLogic & MarketListDataPassing)?
     
     private lazy var contentView: MarketListViewLogic = MarketListView(parentViewController: self)
-    private let searchController = UISearchController()
+    private let searchMarketListViewController = SearchMarketListViewController()
+    private lazy var searchController = UISearchController(searchResultsController: searchMarketListViewController)
     
     // MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -55,13 +56,18 @@ final class MarketListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItems()
+        setupSearchController()
         Task {
             await showMarketList()
         }
     }
     
     func startPrefetching(for page: Int) async {
-        await interactor?.prefetchMarketList(with: MarketListModels.FetchCoins.Request(page: page))
+        await interactor?.prefetchMarketList(with: MarketListModels.CoinList.Request(page: page))
+    }
+    
+    func tableViewDidStartScrolling() {
+        searchController.isActive = false
     }
     
     // MARK: - Private Methods
@@ -71,8 +77,12 @@ final class MarketListViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = searchMarketListViewController
+    }
+    
     private func showMarketList() async {
-        let request = MarketListModels.FetchCoins.Request(page: 1)
+        let request = MarketListModels.CoinList.Request(page: 1)
         
         await interactor?.fetchMarketList(with: request)
     }
@@ -80,11 +90,11 @@ final class MarketListViewController: UIViewController {
 
 // MARK: - Display Logic
 extension MarketListViewController: MarketListDisplayLogic {
-    func displayMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel) {
+    func displayMarketList(_ viewModel: MarketListModels.CoinList.ViewModel) {
         contentView.configure(with: viewModel.marketListCellModel)
     }
     
-    func displayPrefetchedMarketList(_ viewModel: MarketListModels.FetchCoins.ViewModel) {
+    func displayPrefetchedMarketList(_ viewModel: MarketListModels.CoinList.ViewModel) {
         contentView.updateModel(with: viewModel.marketListCellModel)
     }
 }

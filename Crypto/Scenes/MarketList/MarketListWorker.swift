@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MarketListWorkingLogic {
-    func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async -> Result<[CoinModel], RequestError>
+    func fetchMarketList(with request: MarketListModels.CoinList.Request) async -> Result<[CoinModel], RequestError>
 }
 
 final class MarketListWorker: MarketListWorkingLogic {
@@ -23,7 +23,7 @@ final class MarketListWorker: MarketListWorkingLogic {
                                          priceChangePercentage: "24h")
     
     // MARK: - Working Logic
-    func fetchMarketList(with request: MarketListModels.FetchCoins.Request) async -> Result<[CoinModel], RequestError> {
+    func fetchMarketList(with request: MarketListModels.CoinList.Request) async -> Result<[CoinModel], RequestError> {
         coinRequestModel.page = request.page
         return await cryptoService.getMarkets(coinRequestModel: coinRequestModel)
     }

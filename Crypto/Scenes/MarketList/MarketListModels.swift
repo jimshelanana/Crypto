@@ -8,7 +8,7 @@
 import UIKit
 
 enum MarketListModels {
-    enum FetchCoins {
+    enum CoinList {
         struct Request {
             let page: Int
         }
@@ -19,16 +19,6 @@ enum MarketListModels {
         
         struct ViewModel {
             let marketListCellModel: [MarketListCellModel]
-        }
-        
-        struct MarketListCellModel {
-            let id: String
-            let symbol: String
-            let name: String
-            let image: String
-            let currentPrice: String
-            let priceChangePercentageOneDay: String
-            let isPriceChangePositive: Bool
         }
     }
 }

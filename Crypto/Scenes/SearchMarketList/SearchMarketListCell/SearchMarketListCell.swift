@@ -1,13 +1,13 @@
 //
-//  MarketListCell.swift
+//  SearchMarketListCell.swift
 //  Crypto
 //
-//  Created by Nana Jimsheleishvili on 17.11.22.
+//  Created by Nana Jimsheleishvili on 19.11.22.
 //
 
 import UIKit
 
-final class MarketListCell: UITableViewCell {
+final class SearchMarketListCell: UITableViewCell {
     // MARK: - Properties
     private let imageLoadService = ImageLoadService()
     
@@ -18,17 +18,15 @@ final class MarketListCell: UITableViewCell {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
         stackView.spacing = 16
-        stackView.layer.cornerRadius = 14
-        stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = UIColor.systemGray.cgColor
         return stackView
     }()
     
     private var coinIcon: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        icon.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        icon.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        icon.contentMode = .scaleAspectFit
         return icon
     }()
     
@@ -41,25 +39,6 @@ final class MarketListCell: UITableViewCell {
     
     private let coinTitleLabel = UILabel()
     private let coinSymbolLabel = UILabel()
-    
-    private let priceStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 4
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
-    private let coinPriceLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        return label
-    }()
-    
-    private let coinPriceChangeLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        return label
-    }()
     
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -76,8 +55,6 @@ final class MarketListCell: UITableViewCell {
         super.prepareForReuse()
         coinTitleLabel.text = nil
         coinSymbolLabel.text = nil
-        coinPriceLabel.text = nil
-        coinPriceChangeLabel.text = nil
         coinIcon.image = nil
     }
 
@@ -98,9 +75,6 @@ final class MarketListCell: UITableViewCell {
         mainStackView.addArrangedSubview(titleStackView)
         titleStackView.addArrangedSubview(coinTitleLabel)
         titleStackView.addArrangedSubview(coinSymbolLabel)
-        mainStackView.addArrangedSubview(priceStackView)
-        priceStackView.addArrangedSubview(coinPriceLabel)
-        priceStackView.addArrangedSubview(coinPriceChangeLabel)
     }
     
     private func addConstraints() {
@@ -116,9 +90,6 @@ final class MarketListCell: UITableViewCell {
     func configure(with model: MarketListCellModel) {
         coinTitleLabel.text = model.name
         coinSymbolLabel.text = model.symbol
-        coinPriceLabel.text = model.currentPrice
-        coinPriceChangeLabel.text = model.priceChangePercentageOneDay
-        coinPriceChangeLabel.textColor = model.isPriceChangePositive == true ? .green : .red
         loadImage(with: model.image)
     }
     

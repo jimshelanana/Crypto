@@ -8,27 +8,26 @@
 import UIKit
 
 protocol MarketListPresentationLogic {
-    func presentData(_ response: MarketListModels.FetchCoins.Response)
-    func presentPrefetchedData(_ response: MarketListModels.FetchCoins.Response)
+    func presentData(_ response: MarketListModels.CoinList.Response)
+    func presentPrefetchedData(_ response: MarketListModels.CoinList.Response)
 }
 
 final class MarketListPresenter: MarketListPresentationLogic {
-    
-    typealias MarketListCellModel = MarketListModels.FetchCoins.MarketListCellModel
     
     // MARK: - Properties
     weak var viewController: MarketListDisplayLogic?
     
     // MARK: - Presentation Logic
-    func presentData(_ response: MarketListModels.FetchCoins.Response) {
-        viewController?.displayMarketList(MarketListModels.FetchCoins.ViewModel(marketListCellModel:
+    func presentData(_ response: MarketListModels.CoinList.Response) {
+        viewController?.displayMarketList(MarketListModels.CoinList.ViewModel(marketListCellModel:
                                                                                     getMarketListCellModel(response.list)))
     }
     
-    func presentPrefetchedData(_ response: MarketListModels.FetchCoins.Response) {
-        viewController?.displayPrefetchedMarketList(MarketListModels.FetchCoins.ViewModel(marketListCellModel: getMarketListCellModel(response.list)))
+    func presentPrefetchedData(_ response: MarketListModels.CoinList.Response) {
+        viewController?.displayPrefetchedMarketList(MarketListModels.CoinList.ViewModel(marketListCellModel: getMarketListCellModel(response.list)))
     }
     
+    // MARK: - Private Methods
     private func getMarketListCellModel(_ coinModel: [CoinModel]) -> [MarketListCellModel] {
         coinModel.map { setupMarketListCellModel(from: $0) }
     }
