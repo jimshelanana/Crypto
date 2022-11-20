@@ -10,6 +10,7 @@ import Foundation
 enum CryptoEndpoint {
     case markets(CoinRequestModel)
     case search(String)
+    case detail(String)
 }
 
 extension CryptoEndpoint: Endpoint {
@@ -19,19 +20,21 @@ extension CryptoEndpoint: Endpoint {
             return "/api/v3/coins/markets"
         case .search:
             return "/api/v3/search"
+        case .detail(let id):
+            return "/api/v3/coins/\(id)"
         }
     }
-
+    
     var method: RequestMethod {
         switch self {
-        case .markets, .search:
+        case .markets, .search, .detail:
             return .get
         }
     }
-
+    
     var header: [String: String]? {
         switch self {
-        case .markets, .search:
+        case .markets, .search, .detail:
             return ["Content-Type": "application/json;charset=utf-8"]
         }
     }
@@ -47,12 +50,17 @@ extension CryptoEndpoint: Endpoint {
                     "price_change_percentage": model.priceChangePercentage]
         case .search(let searchWord):
             return ["query": searchWord]
+        case .detail:
+            return ["localization": false,
+                    "tickers": false,
+                    "community_data": false,
+                    "developer_data": false]
         }
     }
     
     var body: [String: String]? {
         switch self {
-        case .markets, .search:
+        case .markets, .search, .detail:
             return nil
         }
     }

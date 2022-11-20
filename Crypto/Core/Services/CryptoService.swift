@@ -10,6 +10,7 @@ import Foundation
 protocol CryptoServiceable {
     func getMarkets(coinRequestModel: CoinRequestModel) async -> Result<[CoinModel], RequestError>
     func getSearchForMarket(for searchWord: String) async -> Result<SearchModel, RequestError>
+    func getCoinDetail(for id: String) async -> Result<CoinDetailModel, RequestError>
 }
 
 struct CryptoService: HTTPClient, CryptoServiceable {
@@ -21,5 +22,10 @@ struct CryptoService: HTTPClient, CryptoServiceable {
     func getSearchForMarket(for searchWord: String) async -> Result<SearchModel, RequestError> {
         return await sendRequest(endpoint: CryptoEndpoint.search(searchWord),
                                  responseModel: SearchModel.self)
+    }
+    
+    func getCoinDetail(for id: String) async -> Result<CoinDetailModel, RequestError> {
+        return await sendRequest(endpoint: CryptoEndpoint.detail(id),
+                                 responseModel: CoinDetailModel.self)
     }
 }

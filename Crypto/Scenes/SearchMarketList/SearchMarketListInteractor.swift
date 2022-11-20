@@ -21,11 +21,7 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
     
     var presenter: SearchMarketListPresentationLogic?
     lazy var worker: SearchMarketListWorkingLogic = SearchMarketListWorker()
-    
-    // MARK: - Private Properties
-    
-    //
-    
+
     // MARK: - Business Logic
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async {
         let searchList = await worker.fetchSearchMarketList(with: request)

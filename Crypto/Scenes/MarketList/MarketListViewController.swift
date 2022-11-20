@@ -70,6 +70,11 @@ final class MarketListViewController: UIViewController {
         searchController.isActive = false
     }
     
+    func didSelectRow(for id: String) {
+        requestToSelectCoin(by: id)
+        router?.routeToCoinDetail()
+    }
+    
     // MARK: - Private Methods
     private func setupNavigationItems() {
         title = "Crypto"
@@ -85,6 +90,12 @@ final class MarketListViewController: UIViewController {
         let request = MarketListModels.CoinList.Request(page: 1)
         
         await interactor?.fetchMarketList(with: request)
+    }
+    
+    private func requestToSelectCoin(by id: String) {
+        let request = MarketListModels.SelectCoin.Request(id: id)
+        
+        interactor?.selectCoin(with: request)
     }
 }
 

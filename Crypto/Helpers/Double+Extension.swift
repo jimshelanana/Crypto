@@ -11,4 +11,8 @@ extension Double {
     var percentString: String {
         return String(format: "%.2f%%", self)
     }
+    
+    var doubleString: String {
+        return String(format: "%.2f%", self)
+    }
 }

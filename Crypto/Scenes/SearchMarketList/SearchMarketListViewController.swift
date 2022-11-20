@@ -30,6 +30,7 @@ final class SearchMarketListViewController: UIViewController {
         setup()
     }
     
+    // MARK: - Setup
     private func setup() {
         let interactor = SearchMarketListInteractor()
         let presenter = SearchMarketListPresenter()

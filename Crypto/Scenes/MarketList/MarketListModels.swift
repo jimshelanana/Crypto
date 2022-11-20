@@ -21,4 +21,10 @@ enum MarketListModels {
             let marketListCellModel: [MarketListCellModel]
         }
     }
+    
+    enum SelectCoin {
+      struct Request {
+        let id: String
+      }
+    }
 }
