@@ -9,6 +9,7 @@ import UIKit
 
 protocol CoinDetailDisplayLogic: AnyObject {
     func displayCoinDetail(_ viewModel: CoinDetailModels.CoinDetail.ViewModel)
+    func displayTrendingCoins(_ viewModel: [CoinDetailModels.Trending.ViewModel])
 }
 
 final class CoinDetailViewController: UIViewController {
@@ -55,6 +56,7 @@ final class CoinDetailViewController: UIViewController {
         setupNavigationBar()
         Task {
             await showCoinDetail()
+            await showTrendingCoins()
         }
     }
     
@@ -77,6 +79,10 @@ final class CoinDetailViewController: UIViewController {
         
         interactor?.selectLink(with: request)
     }
+    
+    private func showTrendingCoins() async {
+        await interactor?.fetchTrendingCoins()
+    }
 }
 
 // MARK: - Display Logic
@@ -85,5 +91,9 @@ extension CoinDetailViewController: CoinDetailDisplayLogic {
         DispatchQueue.main.async {
             self.contentView.configure(with: viewModel)
         }
+    }
+    
+    func displayTrendingCoins(_ viewModel: [CoinDetailModels.Trending.ViewModel]) {
+        contentView.configureTrendingList(with: viewModel)
     }
 }

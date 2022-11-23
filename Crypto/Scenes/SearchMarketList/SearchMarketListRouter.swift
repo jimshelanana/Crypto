@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchMarketListRoutingLogic {
-    
+    func routeToCoinDetail() 
 }
 
 protocol SearchMarketListDataPassing {
@@ -18,23 +18,14 @@ protocol SearchMarketListDataPassing {
 final class SearchMarketListRouter: SearchMarketListRoutingLogic, SearchMarketListDataPassing {
     
     // MARK: - Public Properties
-    
     weak var viewController: SearchMarketListViewController?
     var dataStore: SearchMarketListDataStore?
     
-    // MARK: - Private Properties
-    
-    //
-    
-    // MARK: - Routing Logic
-    
-    //
-    
-    // MARK: - Navigation
-    
-    //
-    
-    // MARK: - Passing data
-    
-    //
+    // MARK: - RoutingLogic
+    func routeToCoinDetail() {
+        let coinDetailVC = CoinDetailViewController()
+        guard var coinDetailDataStore = coinDetailVC.router?.dataStore else { return }
+        coinDetailDataStore.selectedCoin = dataStore?.selectedCoin
+        viewController?.present(coinDetailVC, animated: true)
+    }
 }

@@ -14,6 +14,7 @@ struct CoinDetailModel: Codable {
     let links: Links?
     let marketData: MarketData?
     let marketCapRank: Int?
+    let description: Description?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,6 +23,7 @@ struct CoinDetailModel: Codable {
         case links
         case marketData = "market_data"
         case marketCapRank = "market_cap_rank"
+        case description
     }
     
     struct Image: Codable {
@@ -42,5 +44,9 @@ struct CoinDetailModel: Codable {
             case priceChangeOneDay = "price_change_24h"
             case priceChangePercentageOneDay = "price_change_percentage_24h"
         }
+    }
+    
+    struct Description: Codable {
+        let en: String?
     }
 }

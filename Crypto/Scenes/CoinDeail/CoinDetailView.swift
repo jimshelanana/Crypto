@@ -9,6 +9,7 @@ import UIKit
 
 protocol CoinDetailViewLogic: UIView {
     func configure(with model: CoinDetailModels.CoinDetail.ViewModel)
+    func configureTrendingList(with model: [CoinDetailModels.Trending.ViewModel])
 }
 
 final class CoinDetailView: UIView {
@@ -18,6 +19,7 @@ final class CoinDetailView: UIView {
     private var parentViewController: CoinDetailViewController?
     private let imageLoadService = ImageLoadService()
     private var link: String?
+    private var trendingCoinList = [CoinDetailModels.Trending.ViewModel]()
     
     // MARK: - Views
     private let scrollView: UIScrollView = {
@@ -26,13 +28,13 @@ final class CoinDetailView: UIView {
         return scrollView
     }()
     
-    private lazy var contentView: UIView = {
+    private let contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
     
-    private var mainStackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
@@ -61,10 +63,10 @@ final class CoinDetailView: UIView {
     
     private let websiteStackView = UIStackView()
     
-    private lazy var websiteLabel: UILabel = {
+    private let websiteLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
-        label.text = "Website"
+        label.text = "Website:"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -75,6 +77,44 @@ final class CoinDetailView: UIView {
             self?.didTapWebViewButton()
         }, for: .touchUpInside)
         return button
+    }()
+    
+    private let descriptionTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "INFORMATION"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var collectionTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "TRENDING"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    private lazy var flowLayout: UICollectionViewFlowLayout = {
+        let fl = UICollectionViewFlowLayout()
+        fl.minimumInteritemSpacing = 16
+        fl.scrollDirection = .horizontal
+        fl.itemSize = CGSize(width: 152,
+                             height: 92)
+        fl.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        return fl
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        return collectionView
     }()
     
     // MARK: - Init
@@ -95,12 +135,19 @@ final class CoinDetailView: UIView {
     // MARK: - Setup
     private func setup() {
         setupUI()
+        setupCollectionView()
         addSubviews()
         addConstraints()
     }
     
     private func setupUI() {
         backgroundColor = UIColor(named: "AccentColor")
+    }
+    
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(TrendingCoinListCell.self, forCellWithReuseIdentifier: "TrendingCoinListCell")
     }
     
     private func addSubviews() {
@@ -113,6 +160,10 @@ final class CoinDetailView: UIView {
         mainStackView.addArrangedSubview(websiteStackView)
         websiteStackView.addArrangedSubview(websiteLabel)
         websiteStackView.addArrangedSubview(websiteLinkButton)
+        mainStackView.addArrangedSubview(descriptionTitleLabel)
+        mainStackView.addArrangedSubview(descriptionLabel)
+        mainStackView.addArrangedSubview(collectionTitleLabel)
+        contentView.addSubview(collectionView)
     }
     
     private func addConstraints() {
@@ -135,8 +186,16 @@ final class CoinDetailView: UIView {
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             mainStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 16),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            collectionView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            collectionView.heightAnchor.constraint(equalToConstant: 92)
         ])
     }
     
@@ -172,13 +231,41 @@ final class CoinDetailView: UIView {
 // MARK: - CoinDetailViewLogic
 extension CoinDetailView: CoinDetailViewLogic {
     func configure(with model: Model) {
-        coinButton.setTitle(model.name, for: .normal)
+        coinButton.setTitle(model.name.uppercased(), for: .normal)
         coinPriceLabel.text = model.currentPriceInUSD
         link = model.link
+        descriptionLabel.text = model.description?.htmlToString
         loadImage(with: model.image)
         websiteLinkButton.setTitle(model.link, for: .normal)
         setupCoinPriceChangeLabel(with: model.priceChangeOneDay,
                                   priceChangePercentageOneDay: model.priceChangePercentageOneDay,
                                   isPriceChangePositive: model.isPriceChangePositive)
     }
+    
+    func configureTrendingList(with model: [CoinDetailModels.Trending.ViewModel]) {
+        trendingCoinList = model
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+// MARK: UICollectionViewDataSource
+extension CoinDetailView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        trendingCoinList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCoinListCell", for: indexPath) as? TrendingCoinListCell {
+            cell.configure(with: trendingCoinList[indexPath.row])
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
+
+// MARK: UICollectionViewDelegate
+extension CoinDetailView: UICollectionViewDelegate {
+    
 }

@@ -10,6 +10,7 @@ import Foundation
 protocol CoinDetailBusinessLogic {
     func fetchCoinDetail() async
     func selectLink(with request: CoinDetailModels.SelectLink.Request)
+    func fetchTrendingCoins() async 
 }
 
 protocol CoinDetailDataStore {
@@ -42,5 +43,17 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
     
     func selectLink(with request: CoinDetailModels.SelectLink.Request) {
         selectedLink = request.link
+    }
+    
+    func fetchTrendingCoins() async {
+        let trendingCoins = await worker.fetchTrendingCoins()
+        switch trendingCoins {
+        case .success(let data):
+            let model = CoinDetailModels.Trending.Response(coins: data)
+            presenter?.presentTrendingCoins(model)
+        case .failure(_):
+            //TODO: Errorhandling
+            break
+        }
     }
 }

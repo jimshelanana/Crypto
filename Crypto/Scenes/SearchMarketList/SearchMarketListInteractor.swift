@@ -9,10 +9,11 @@ import Foundation
 
 protocol SearchMarketListBusinessLogic {
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async
+    func selectCoin(with request: SearchMarketListModels.SelectCoin.Request)
 }
 
 protocol SearchMarketListDataStore {
-    
+    var selectedCoin: String? { get }
 }
 
 final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMarketListDataStore {
@@ -21,6 +22,7 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
     
     var presenter: SearchMarketListPresentationLogic?
     lazy var worker: SearchMarketListWorkingLogic = SearchMarketListWorker()
+    var selectedCoin: String?
 
     // MARK: - Business Logic
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async {
@@ -33,5 +35,9 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
             //TODO: Errorhandling
             break
         }
+    }
+    
+    func selectCoin(with request: SearchMarketListModels.SelectCoin.Request) {
+        selectedCoin = request.id
     }
 }

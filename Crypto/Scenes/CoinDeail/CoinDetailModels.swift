@@ -27,6 +27,23 @@ enum CoinDetailModels {
             let priceChangeOneDay: String
             let priceChangePercentageOneDay: String
             let isPriceChangePositive: Bool
+            let description: String?
+        }
+    }
+    
+    enum Trending {
+        struct Request {
+        }
+        
+        struct Response {
+            let coins: TrendingCoins
+        }
+        
+        struct ViewModel {
+            let id: String?
+            let name: String?
+            let image: String?
+            let marketRank: String?
         }
     }
     

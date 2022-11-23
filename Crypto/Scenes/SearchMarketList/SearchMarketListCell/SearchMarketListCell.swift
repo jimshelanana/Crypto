@@ -16,16 +16,16 @@ final class SearchMarketListCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
-        stackView.spacing = 16
+        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        stackView.spacing = 10
         return stackView
     }()
     
     private var coinIcon: UIImageView = {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        icon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        icon.widthAnchor.constraint(equalToConstant: 20).isActive = true
         icon.contentMode = .scaleAspectFit
         return icon
     }()

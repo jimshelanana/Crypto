@@ -11,6 +11,7 @@ enum CryptoEndpoint {
     case markets(CoinRequestModel)
     case search(String)
     case detail(String)
+    case trending
 }
 
 extension CryptoEndpoint: Endpoint {
@@ -22,19 +23,21 @@ extension CryptoEndpoint: Endpoint {
             return "/api/v3/search"
         case .detail(let id):
             return "/api/v3/coins/\(id)"
+        case .trending:
+            return "/api/v3/search/trending"
         }
     }
     
     var method: RequestMethod {
         switch self {
-        case .markets, .search, .detail:
+        case .markets, .search, .detail, .trending:
             return .get
         }
     }
     
     var header: [String: String]? {
         switch self {
-        case .markets, .search, .detail:
+        case .markets, .search, .detail, .trending:
             return ["Content-Type": "application/json;charset=utf-8"]
         }
     }
@@ -55,12 +58,14 @@ extension CryptoEndpoint: Endpoint {
                     "tickers": false,
                     "community_data": false,
                     "developer_data": false]
+        case .trending:
+            return nil
         }
     }
     
     var body: [String: String]? {
         switch self {
-        case .markets, .search, .detail:
+        case .markets, .search, .detail, .trending:
             return nil
         }
     }

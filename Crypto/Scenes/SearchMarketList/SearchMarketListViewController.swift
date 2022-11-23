@@ -53,6 +53,18 @@ final class SearchMarketListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func didSelectRow(for id: String) {
+        requestToSelectCoin(by: id)
+        router?.routeToCoinDetail()
+    }
+    
+    // MARK: - Private Methods
+    private func requestToSelectCoin(by id: String) {
+        let request = SearchMarketListModels.SelectCoin.Request(id: id)
+        
+        interactor?.selectCoin(with: request)
+    }
 }
 
 // MARK: - Display Logic
