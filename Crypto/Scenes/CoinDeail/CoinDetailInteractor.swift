@@ -35,8 +35,8 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
         case .success(let data):
             let model = CoinDetailModels.CoinDetail.Response(detail: data)
             presenter?.presentCoinDetail(model)
-        case .failure(_):
-            //TODO: Errorhandling
+        case .failure(let error):
+            presenter?.presentServiceCallError(error: error)
             break
         }
     }
@@ -52,7 +52,6 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
             let model = CoinDetailModels.Trending.Response(coins: data)
             presenter?.presentTrendingCoins(model)
         case .failure(_):
-            //TODO: Errorhandling
             break
         }
     }

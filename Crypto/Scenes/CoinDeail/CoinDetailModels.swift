@@ -27,7 +27,7 @@ enum CoinDetailModels {
             let priceChangeOneDay: String
             let priceChangePercentageOneDay: String
             let isPriceChangePositive: Bool
-            let description: String?
+            let description: String
         }
     }
     

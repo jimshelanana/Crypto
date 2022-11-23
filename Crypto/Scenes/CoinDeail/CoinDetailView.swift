@@ -67,12 +67,14 @@ final class CoinDetailView: UIView {
         let label = UILabel()
         label.text = "Website:"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.isHidden = true
         return label
     }()
     
     private lazy var websiteLinkButton: UIButton = {
         let button = UIButton(configuration: .plain())
         button.setTitleColor(.link, for: .normal)
+        button.contentHorizontalAlignment = .right
         button.addAction(UIAction { [weak self] _ in
             self?.didTapWebViewButton()
         }, for: .touchUpInside)
@@ -83,6 +85,7 @@ final class CoinDetailView: UIView {
         let label = UILabel()
         label.text = "INFORMATION"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.isHidden = true
         return label
     }()
     
@@ -96,6 +99,7 @@ final class CoinDetailView: UIView {
         let label = UILabel()
         label.text = "TRENDING"
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.isHidden = true
         return label
     }()
     
@@ -234,17 +238,21 @@ extension CoinDetailView: CoinDetailViewLogic {
         coinButton.setTitle(model.name.uppercased(), for: .normal)
         coinPriceLabel.text = model.currentPriceInUSD
         link = model.link
-        descriptionLabel.text = model.description?.htmlToString
+        descriptionLabel.text = model.description.htmlToString
         loadImage(with: model.image)
         websiteLinkButton.setTitle(model.link, for: .normal)
         setupCoinPriceChangeLabel(with: model.priceChangeOneDay,
                                   priceChangePercentageOneDay: model.priceChangePercentageOneDay,
                                   isPriceChangePositive: model.isPriceChangePositive)
+        websiteLabel.isHidden = model.link.isEmpty
+        descriptionTitleLabel.isHidden = model.description.isEmpty
+        
     }
     
     func configureTrendingList(with model: [CoinDetailModels.Trending.ViewModel]) {
         trendingCoinList = model
         DispatchQueue.main.async {
+            self.collectionTitleLabel.isHidden = model.isEmpty
             self.collectionView.reloadData()
         }
     }

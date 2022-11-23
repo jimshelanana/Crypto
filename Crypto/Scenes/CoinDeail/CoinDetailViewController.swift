@@ -10,6 +10,7 @@ import UIKit
 protocol CoinDetailDisplayLogic: AnyObject {
     func displayCoinDetail(_ viewModel: CoinDetailModels.CoinDetail.ViewModel)
     func displayTrendingCoins(_ viewModel: [CoinDetailModels.Trending.ViewModel])
+    func displayServiceCallError(_ error: String)
 }
 
 final class CoinDetailViewController: UIViewController {
@@ -95,5 +96,17 @@ extension CoinDetailViewController: CoinDetailDisplayLogic {
     
     func displayTrendingCoins(_ viewModel: [CoinDetailModels.Trending.ViewModel]) {
         contentView.configureTrendingList(with: viewModel)
+    }
+    
+    func displayServiceCallError(_ error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            Task {
+                await self?.showCoinDetail()
+            }
+        }))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

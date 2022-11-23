@@ -10,6 +10,7 @@ import UIKit
 protocol MarketListDisplayLogic: AnyObject {
     func displayMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
     func displayPrefetchedMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
+    func displayServiceCallError(_ error: String)
 }
 
 final class MarketListViewController: UIViewController {
@@ -107,5 +108,17 @@ extension MarketListViewController: MarketListDisplayLogic {
     
     func displayPrefetchedMarketList(_ viewModel: MarketListModels.CoinList.ViewModel) {
         contentView.updateModel(with: viewModel.marketListCellModel)
+    }
+    
+    func displayServiceCallError(_ error: String) {
+        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            Task {
+                await self?.showMarketList()
+            }
+        }))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

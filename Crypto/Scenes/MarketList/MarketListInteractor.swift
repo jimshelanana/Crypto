@@ -45,8 +45,8 @@ final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
         switch marketList {
         case .success(let data):
             return MarketListModels.CoinList.Response(list: data)
-        case .failure(_):
-            //TODO: Errorhandling
+        case .failure(let error):
+            presenter?.presentServiceCallError(error: error)
             return nil
         }
     }

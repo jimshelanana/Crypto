@@ -32,7 +32,6 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
             let model = SearchMarketListModels.CoinList.Response(list: data)
             presenter?.presentSearchData(model)
         case .failure(_):
-            //TODO: Errorhandling
             break
         }
     }
