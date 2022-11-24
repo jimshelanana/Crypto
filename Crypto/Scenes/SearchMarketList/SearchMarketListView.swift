@@ -48,12 +48,12 @@ final class SearchMarketListView: UIView {
         setupUI()
         addSubviews()
         addConstraints()
-        registerCell()
-        tableView.dataSource = self
-        tableView.delegate = self
+        setupTableView()
     }
     
-    private func registerCell() {
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(SearchMarketListCell.self, forCellReuseIdentifier: "SearchMarketListCell")
     }
     
