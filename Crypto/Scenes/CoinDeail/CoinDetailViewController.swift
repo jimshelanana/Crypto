@@ -66,6 +66,11 @@ final class CoinDetailViewController: UIViewController {
         requestToSelectLink(by: link)
         router?.routeToWebLink()
     }
+    
+    func didSelectTrendingCoin(by id: String) {
+        requestToSelectTrendingCoin(by: id)
+        router?.routeToCoinDetailPage()
+    }
 
     // MARK: - Private Method
     private func setupNavigationBar() {
@@ -84,6 +89,12 @@ final class CoinDetailViewController: UIViewController {
     
     private func showTrendingCoins() async {
         await interactor?.fetchTrendingCoins()
+    }
+    
+    private func requestToSelectTrendingCoin(by id: String) {
+        let request = CoinDetailModels.SelectCoin.Request(id: id)
+        
+        interactor?.selectedTrendingCoin(with: request)
     }
 }
 

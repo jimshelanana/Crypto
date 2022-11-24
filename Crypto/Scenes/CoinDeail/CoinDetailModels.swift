@@ -52,4 +52,10 @@ enum CoinDetailModels {
         let link: String
       }
     }
+    
+    enum SelectCoin {
+      struct Request {
+        let id: String
+      }
+    }
 }

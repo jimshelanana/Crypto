@@ -298,5 +298,8 @@ extension CoinDetailView: UICollectionViewDataSource {
 
 // MARK: UICollectionViewDelegate
 extension CoinDetailView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let coin = trendingCoinList[indexPath.row].id else{ return }
+        parentViewController?.didSelectTrendingCoin(by: coin)
+    }
 }
