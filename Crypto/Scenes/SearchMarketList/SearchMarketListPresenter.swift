@@ -9,6 +9,7 @@ import UIKit
 
 protocol SearchMarketListPresentationLogic {
     func presentSearchData(_ response: SearchMarketListModels.CoinList.Response)
+    func presentIsLoading(_ isLoading: Bool)
 }
 
 final class SearchMarketListPresenter: SearchMarketListPresentationLogic {
@@ -25,5 +26,9 @@ final class SearchMarketListPresenter: SearchMarketListPresentationLogic {
                                 image: item.image ?? "")
         }
         viewController?.displaySearchedMarketList(.init(searchListCellModel: model))
+    }
+    
+    func presentIsLoading(_ isLoading: Bool) {
+        viewController?.displayIsLoading(isLoading)
     }
 }

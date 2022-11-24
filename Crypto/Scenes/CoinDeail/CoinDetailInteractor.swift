@@ -30,6 +30,8 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
     // MARK: - Business Logic
     func fetchCoinDetail() async {
         guard let selectedCoin else { return }
+        presenter?.presentIsLoading(true)
+        defer { presenter?.presentIsLoading(false) }
         let coinDetail = await worker.fetchCoinDetail(for: .init(id: selectedCoin))
         switch coinDetail {
         case .success(let data):

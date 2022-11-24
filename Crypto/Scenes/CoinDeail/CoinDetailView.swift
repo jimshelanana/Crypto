@@ -10,6 +10,7 @@ import UIKit
 protocol CoinDetailViewLogic: UIView {
     func configure(with model: CoinDetailModels.CoinDetail.ViewModel)
     func configureTrendingList(with model: [CoinDetailModels.Trending.ViewModel])
+    func isLoadingActivateIndicator(_ isLoading: Bool)
 }
 
 final class CoinDetailView: UIView {
@@ -121,6 +122,14 @@ final class CoinDetailView: UIView {
         return collectionView
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+      let activityIndicator = UIActivityIndicatorView()
+      activityIndicator.style = .large
+      activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+      activityIndicator.hidesWhenStopped = true
+      return activityIndicator
+  }()
+    
     // MARK: - Init
     override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
@@ -168,6 +177,7 @@ final class CoinDetailView: UIView {
         mainStackView.addArrangedSubview(descriptionLabel)
         mainStackView.addArrangedSubview(collectionTitleLabel)
         contentView.addSubview(collectionView)
+        contentView.addSubview(activityIndicator)
     }
     
     private func addConstraints() {
@@ -200,6 +210,11 @@ final class CoinDetailView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             collectionView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             collectionView.heightAnchor.constraint(equalToConstant: 92)
+        ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
     
@@ -254,6 +269,14 @@ extension CoinDetailView: CoinDetailViewLogic {
         DispatchQueue.main.async {
             self.collectionTitleLabel.isHidden = model.isEmpty
             self.collectionView.reloadData()
+        }
+    }
+    
+    func isLoadingActivateIndicator(_ isLoading: Bool) {
+        DispatchQueue.main.async {
+            isLoading
+            ? self.activityIndicator.startAnimating()
+            : self.activityIndicator.stopAnimating()
         }
     }
 }

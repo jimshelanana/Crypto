@@ -41,6 +41,9 @@ final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
     
     // MARK: - Private Methods
     private func getMarketList(for request: MarketListModels.CoinList.Request) async -> MarketListModels.CoinList.Response? {
+        presenter?.presentIsLoading(true)
+        defer { presenter?.presentIsLoading(false) }
+        
         let marketList = await worker.fetchMarketList(with: request)
         switch marketList {
         case .success(let data):

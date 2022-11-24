@@ -73,7 +73,7 @@ final class TrendingCoinListCell: UICollectionViewCell {
     private func setupUI() {
         contentView.layer.cornerRadius = 16
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderColor = UIColor.systemGray.cgColor
         contentView.layer.masksToBounds = true
     }
     

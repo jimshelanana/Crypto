@@ -9,6 +9,7 @@ import UIKit
 
 protocol SearchMarketListViewLogic: UIView {
     func configure(with model: [MarketListCellModel])
+    func isLoadingActivateIndicator(_ isLoading: Bool)
 }
 
 final class SearchMarketListView: UIView {
@@ -27,6 +28,14 @@ final class SearchMarketListView: UIView {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+      let activityIndicator = UIActivityIndicatorView()
+      activityIndicator.style = .large
+      activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+      activityIndicator.hidesWhenStopped = true
+      return activityIndicator
+  }()
     
     // MARK: - Init
     override init(frame: CGRect = CGRect.zero) {
@@ -63,6 +72,7 @@ final class SearchMarketListView: UIView {
     
     private func addSubviews() {
         self.addSubview(tableView)
+        tableView.addSubview(activityIndicator)
     }
     
     private func addConstraints() {
@@ -71,6 +81,11 @@ final class SearchMarketListView: UIView {
             tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
 }
@@ -81,6 +96,14 @@ extension SearchMarketListView: SearchMarketListViewLogic {
         self.model = model
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    func isLoadingActivateIndicator(_ isLoading: Bool) {
+        DispatchQueue.main.async {
+            isLoading
+            ? self.activityIndicator.startAnimating()
+            : self.activityIndicator.stopAnimating()
         }
     }
 }

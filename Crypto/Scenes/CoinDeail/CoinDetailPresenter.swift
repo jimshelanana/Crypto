@@ -10,7 +10,8 @@ import UIKit
 protocol CoinDetailPresentationLogic {
     func presentCoinDetail(_ response: CoinDetailModels.CoinDetail.Response)
     func presentTrendingCoins(_ response: CoinDetailModels.Trending.Response)
-    func presentServiceCallError(error: RequestError) 
+    func presentServiceCallError(error: RequestError)
+    func presentIsLoading(_ isLoading: Bool)
 }
 
 final class CoinDetailPresenter: CoinDetailPresentationLogic {
@@ -49,5 +50,9 @@ final class CoinDetailPresenter: CoinDetailPresentationLogic {
     
     func presentServiceCallError(error: RequestError) {
         viewController?.displayServiceCallError(error.localizedDescription)
+    }
+    
+    func presentIsLoading(_ isLoading: Bool) {
+        viewController?.displayIsLoading(isLoading)
     }
 }

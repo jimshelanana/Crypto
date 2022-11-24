@@ -11,6 +11,7 @@ protocol MarketListDisplayLogic: AnyObject {
     func displayMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
     func displayPrefetchedMarketList(_ viewModel: MarketListModels.CoinList.ViewModel)
     func displayServiceCallError(_ error: String)
+    func displayIsLoading(_ isLoading: Bool)
 }
 
 final class MarketListViewController: UIViewController {
@@ -120,5 +121,9 @@ extension MarketListViewController: MarketListDisplayLogic {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func displayIsLoading(_ isLoading: Bool) {
+        contentView.isLoadingActivateIndicator(isLoading)
     }
 }

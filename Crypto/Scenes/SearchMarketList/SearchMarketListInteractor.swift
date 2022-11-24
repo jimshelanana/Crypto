@@ -26,6 +26,9 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
 
     // MARK: - Business Logic
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async {
+        presenter?.presentIsLoading(true)
+        defer { presenter?.presentIsLoading(false) }
+        
         let searchList = await worker.fetchSearchMarketList(with: request)
         switch searchList {
         case .success(let data):

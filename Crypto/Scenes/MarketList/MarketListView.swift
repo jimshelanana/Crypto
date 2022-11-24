@@ -10,6 +10,7 @@ import UIKit
 protocol MarketListViewLogic: UIView {
     func configure(with model: [MarketListCellModel])
     func updateModel(with prefetchedItems: [MarketListCellModel])
+    func isLoadingActivateIndicator(_ isLoading: Bool)
 }
 
 final class MarketListView: UIView {
@@ -30,6 +31,14 @@ final class MarketListView: UIView {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+      let activityIndicator = UIActivityIndicatorView()
+      activityIndicator.style = .large
+      activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+      activityIndicator.hidesWhenStopped = true
+      return activityIndicator
+  }()
     
     // MARK: - Init
     override init(frame: CGRect = CGRect.zero) {
@@ -66,6 +75,7 @@ final class MarketListView: UIView {
     
     private func addSubviews() {
         self.addSubview(tableView)
+        tableView.addSubview(activityIndicator)
     }
     
     private func addConstraints() {
@@ -74,6 +84,11 @@ final class MarketListView: UIView {
             tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
 }
@@ -93,6 +108,14 @@ extension MarketListView: MarketListViewLogic {
         DispatchQueue.main.async {
             self.isLoadingData = false
             self.tableView.reloadData()
+        }
+    }
+    
+    func isLoadingActivateIndicator(_ isLoading: Bool) {
+        DispatchQueue.main.async {
+            isLoading
+            ? self.activityIndicator.startAnimating()
+            : self.activityIndicator.stopAnimating()
         }
     }
 }
@@ -120,7 +143,7 @@ extension MarketListView: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-        if position > tableView.contentSize.height - 100 - scrollView.frame.size.height && isLoadingData == false {
+        if position > tableView.contentSize.height - 200 - scrollView.frame.size.height && isLoadingData == false {
             marketListPage += 1
             isLoadingData = true
             Task {

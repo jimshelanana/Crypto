@@ -9,6 +9,7 @@ import UIKit
 
 protocol SearchMarketListDisplayLogic: AnyObject {
     func displaySearchedMarketList(_ viewModel: SearchMarketListModels.CoinList.ViewModel)
+    func displayIsLoading(_ isLoading: Bool) 
 }
 
 final class SearchMarketListViewController: UIViewController {
@@ -82,5 +83,9 @@ extension SearchMarketListViewController: UISearchResultsUpdating {
                 await interactor?.fetchSearchMarketList(with: SearchMarketListModels.CoinList.Request(searchWord: searchText))
             }
         }
+    }
+    
+    func displayIsLoading(_ isLoading: Bool) {
+        contentView.isLoadingActivateIndicator(isLoading)
     }
 }

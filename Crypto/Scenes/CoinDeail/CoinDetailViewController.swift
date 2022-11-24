@@ -11,6 +11,7 @@ protocol CoinDetailDisplayLogic: AnyObject {
     func displayCoinDetail(_ viewModel: CoinDetailModels.CoinDetail.ViewModel)
     func displayTrendingCoins(_ viewModel: [CoinDetailModels.Trending.ViewModel])
     func displayServiceCallError(_ error: String)
+    func displayIsLoading(_ isLoading: Bool) 
 }
 
 final class CoinDetailViewController: UIViewController {
@@ -108,5 +109,9 @@ extension CoinDetailViewController: CoinDetailDisplayLogic {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func displayIsLoading(_ isLoading: Bool) {
+        contentView.isLoadingActivateIndicator(isLoading)
     }
 }

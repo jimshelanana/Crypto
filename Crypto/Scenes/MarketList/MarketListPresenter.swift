@@ -10,7 +10,8 @@ import UIKit
 protocol MarketListPresentationLogic {
     func presentData(_ response: MarketListModels.CoinList.Response)
     func presentPrefetchedData(_ response: MarketListModels.CoinList.Response)
-    func presentServiceCallError(error: RequestError) 
+    func presentServiceCallError(error: RequestError)
+    func presentIsLoading(_ isLoading: Bool)
 }
 
 final class MarketListPresenter: MarketListPresentationLogic {
@@ -30,6 +31,10 @@ final class MarketListPresenter: MarketListPresentationLogic {
     
     func presentServiceCallError(error: RequestError) {
         viewController?.displayServiceCallError(error.localizedDescription)
+    }
+    
+    func presentIsLoading(_ isLoading: Bool) {
+        viewController?.displayIsLoading(isLoading)
     }
     
     // MARK: - Private Methods
