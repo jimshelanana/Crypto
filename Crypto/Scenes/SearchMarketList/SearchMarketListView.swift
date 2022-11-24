@@ -63,11 +63,11 @@ final class SearchMarketListView: UIView {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(SearchMarketListCell.self, forCellReuseIdentifier: "SearchMarketListCell")
+        tableView.register(SearchMarketListCell.self, forCellReuseIdentifier: Constants.CellName.searchCoin.rawValue)
     }
     
     private func setupUI() {
-        backgroundColor = UIColor(named: "AccentColor")
+        backgroundColor = UIColor(named: Constants.Colors.accentColor.rawValue)
     }
     
     private func addSubviews() {
@@ -115,7 +115,7 @@ extension SearchMarketListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "SearchMarketListCell") as? SearchMarketListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellName.searchCoin.rawValue) as? SearchMarketListCell {
             cell.configure(with: model[indexPath.row])
             return cell
         }

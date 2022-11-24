@@ -60,17 +60,17 @@ final class MarketListView: UIView {
         setupUI()
         addSubviews()
         addConstraints()
-        registerCell()
-        tableView.dataSource = self
-        tableView.delegate = self
+        setupTableView()
     }
     
-    private func registerCell() {
-        tableView.register(MarketListCell.self, forCellReuseIdentifier: "MarketListCell")
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(MarketListCell.self, forCellReuseIdentifier: Constants.CellName.marketList.rawValue)
     }
     
     private func setupUI() {
-        backgroundColor = UIColor(named: "AccentColor")
+        backgroundColor = UIColor(named: Constants.Colors.accentColor.rawValue)
     }
     
     private func addSubviews() {
@@ -127,7 +127,7 @@ extension MarketListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "MarketListCell") as? MarketListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellName.marketList.rawValue) as? MarketListCell {
             cell.configure(with: model[indexPath.row])
             return cell
         }

@@ -46,7 +46,7 @@ final class CoinDetailView: UIView {
     private let coinButton: UIButton = {
         let button = UIButton(configuration: .plain())
         button.configuration?.imagePadding = 8
-        button.tintColor = UIColor(named: "PrimaryTextColor")
+        button.tintColor = UIColor(named: Constants.Colors.primary.rawValue)
         return button
     }()
     
@@ -154,13 +154,13 @@ final class CoinDetailView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = UIColor(named: "AccentColor")
+        backgroundColor = UIColor(named: Constants.Colors.accentColor.rawValue)
     }
     
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(TrendingCoinListCell.self, forCellWithReuseIdentifier: "TrendingCoinListCell")
+        collectionView.register(TrendingCoinListCell.self, forCellWithReuseIdentifier: Constants.CellName.trendingCoins.rawValue)
     }
     
     private func addSubviews() {
@@ -288,7 +288,7 @@ extension CoinDetailView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingCoinListCell", for: indexPath) as? TrendingCoinListCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellName.trendingCoins.rawValue, for: indexPath) as? TrendingCoinListCell {
             cell.configure(with: trendingCoinList[indexPath.row])
             return cell
         }

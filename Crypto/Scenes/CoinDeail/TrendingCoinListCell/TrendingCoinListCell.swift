@@ -112,7 +112,7 @@ final class TrendingCoinListCell: UICollectionViewCell {
                     self.iconImageView.image = image
                 }
             case .failure(_):
-                self.iconImageView.image = UIImage(systemName: "photo")
+                self.iconImageView.image = UIImage(systemName: Constants.Images.photo.rawValue)
                 self.iconImageView.tintColor = .gray
             }
         }

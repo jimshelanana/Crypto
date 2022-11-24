@@ -132,7 +132,7 @@ final class MarketListCell: UITableViewCell {
                     self.coinIcon.image = image
                 }
             case .failure(_):
-                self.coinIcon.image = UIImage(systemName: "photo")
+                self.coinIcon.image = UIImage(systemName: Constants.Images.photo.rawValue)
                 self.coinIcon.tintColor = .gray
             }
         }
