@@ -35,7 +35,6 @@ final class CoinDetailRouter: CoinDetailRoutingLogic, CoinDetailDataPassing {
         guard var coinDetailDataStore = coinDetailVC.router?.dataStore else { return }
         coinDetailDataStore.selectedCoin = dataStore?.selectedCoin
         guard let allButCurrentController = viewController?.navigationController?.viewControllers.dropLast() else {
-            viewController?.presentationController?.dismissalTransitionWillBegin()
             viewController?.present(coinDetailVC, animated: true)
             return
         }
