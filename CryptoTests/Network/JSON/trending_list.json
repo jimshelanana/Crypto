@@ -1,0 +1,12 @@
+{
+    "coins": [
+        {
+            "item": {
+                "id": "gains-network",
+                "name": "Gains Network",
+                "market_cap_rank": 208,
+                "small": "https://assets.coingecko.com/coins/images/19737/small/logo.png?1635909203"
+            }
+        }
+    ]
+}

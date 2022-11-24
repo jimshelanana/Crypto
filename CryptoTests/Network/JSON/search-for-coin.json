@@ -1,0 +1,10 @@
+{
+    "coins": [
+        {
+            "id": "bitcoin",
+            "name": "Bitcoin",
+            "symbol": "BTC",
+            "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+        }
+    ]
+}
