@@ -16,7 +16,7 @@ struct SearchCoinModel: Codable {
     let symbol: String?
     let name: String?
     let image: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case symbol

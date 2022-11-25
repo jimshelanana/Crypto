@@ -21,10 +21,11 @@ protocol CoinDetailDataStore {
 
 final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
     
-    // MARK: - Public Properties
-    
+    // MARK: - Properties
     var presenter: CoinDetailPresentationLogic?
     lazy var worker: CoinDetailWorkingLogic = CoinDetailWorker()
+    
+    // MARK: - DataStore Properties
     var selectedCoin: String?
     var selectedLink: String?
     
@@ -40,7 +41,6 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
             presenter?.presentCoinDetail(model)
         case .failure(let error):
             presenter?.presentServiceCallError(error: error)
-            break
         }
     }
     

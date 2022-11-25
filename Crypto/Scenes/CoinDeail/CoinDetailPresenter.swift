@@ -24,25 +24,29 @@ final class CoinDetailPresenter: CoinDetailPresentationLogic {
         let currentPrice = "Current price: \(response.detail.marketData?.currentPrice["usd"] ?? 0)$"
         let priceChangeOneDay = "24h Change: \(response.detail.marketData?.priceChangeOneDay?.doubleString ?? "0")$"
         let priceChangePercentageOneDay = "\(response.detail.marketData?.priceChangePercentageOneDay?.percentString ?? "0")"
-        let model = CoinDetailModels.CoinDetail.ViewModel(id: response.detail.id ?? "",
-                                                          name: response.detail.name ?? "",
-                                                          image: response.detail.image?.small ?? "",
-                                                          link: response.detail.links?.homepage?[0] ?? "",
-                                                          currentPriceInUSD: currentPrice,
-                                                          marketCapRank: "\(response.detail.marketCapRank ?? 0)",
-                                                          priceChangeOneDay: priceChangeOneDay,
-                                                          priceChangePercentageOneDay: priceChangePercentageOneDay,
-                                                          isPriceChangePositive: response.detail.marketData?.priceChangePercentageOneDay?.sign == .plus,
-                                                          description: response.detail.description?.en ?? "")
+        let model = CoinDetailModels.CoinDetail.ViewModel(
+            id: response.detail.id ?? "",
+            name: response.detail.name ?? "",
+            image: response.detail.image?.small ?? "",
+            link: response.detail.links?.homepage?[0] ?? "",
+            currentPriceInUSD: currentPrice,
+            marketCapRank: "\(response.detail.marketCapRank ?? 0)",
+            priceChangeOneDay: priceChangeOneDay,
+            priceChangePercentageOneDay: priceChangePercentageOneDay,
+            isPriceChangePositive: response.detail.marketData?.priceChangePercentageOneDay?.sign == .plus,
+            description: response.detail.description?.en ?? ""
+        )
         viewController?.displayCoinDetail(model)
     }
     
     func presentTrendingCoins(_ response: CoinDetailModels.Trending.Response) {
         let model = response.coins.coins.map { coin in
-            CoinDetailModels.Trending.ViewModel(id: coin.item.id,
-                                                name: coin.item.name,
-                                                image: coin.item.image,
-                                                marketRank: "#\(coin.item.marketRank ?? 0)")
+            CoinDetailModels.Trending.ViewModel(
+                id: coin.item.id,
+                name: coin.item.name,
+                image: coin.item.image,
+                marketRank: "#\(coin.item.marketRank ?? 0)"
+            )
         }
         
         viewController?.displayTrendingCoins(model)

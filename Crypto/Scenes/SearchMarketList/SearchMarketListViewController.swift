@@ -9,7 +9,7 @@ import UIKit
 
 protocol SearchMarketListDisplayLogic: AnyObject {
     func displaySearchedMarketList(_ viewModel: SearchMarketListModels.CoinList.ViewModel)
-    func displayIsLoading(_ isLoading: Bool) 
+    func displayIsLoading(_ isLoading: Bool)
 }
 
 final class SearchMarketListViewController: UIViewController {
@@ -76,6 +76,7 @@ extension SearchMarketListViewController: SearchMarketListDisplayLogic {
 }
 
 
+// MARK: - UISearchResultsUpdating
 extension SearchMarketListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {

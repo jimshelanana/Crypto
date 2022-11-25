@@ -22,6 +22,8 @@ final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
     // MARK: - Properties
     var presenter: MarketListPresentationLogic?
     lazy var worker: MarketListWorkingLogic = MarketListWorker()
+    
+    // MARK: - DataStore Properties
     var selectedCoin: String?
     
     // MARK: - Business Logic

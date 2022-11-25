@@ -42,7 +42,7 @@ final class CoinDetailView: UIView {
         stackView.axis = .vertical
         return stackView
     }()
-
+    
     private let coinButton: UIButton = {
         let button = UIButton(configuration: .plain())
         button.configuration?.imagePadding = 8
@@ -55,7 +55,7 @@ final class CoinDetailView: UIView {
         label.textAlignment = .center
         return label
     }()
-
+    
     private let coinPriceChangeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -123,12 +123,12 @@ final class CoinDetailView: UIView {
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-      let activityIndicator = UIActivityIndicatorView()
-      activityIndicator.style = .large
-      activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-      activityIndicator.hidesWhenStopped = true
-      return activityIndicator
-  }()
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     // MARK: - Init
     override init(frame: CGRect = CGRect.zero) {
@@ -147,20 +147,21 @@ final class CoinDetailView: UIView {
     
     // MARK: - Setup
     private func setup() {
-        setupUI()
+        setupView()
         setupCollectionView()
         addSubviews()
         addConstraints()
     }
     
-    private func setupUI() {
+    private func setupView() {
         backgroundColor = UIColor(named: Constants.Colors.accentColor.rawValue)
     }
     
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(TrendingCoinListCell.self, forCellWithReuseIdentifier: Constants.CellName.trendingCoins.rawValue)
+        collectionView.register(TrendingCoinListCell.self,
+                                forCellWithReuseIdentifier: Constants.CellName.trendingCoins.rawValue)
     }
     
     private func addSubviews() {
@@ -195,7 +196,7 @@ final class CoinDetailView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
-
+        
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -238,10 +239,14 @@ final class CoinDetailView: UIView {
         parentViewController?.didTapLink(by: link)
     }
     
-    private func setupCoinPriceChangeLabel(with priceChangeOneDay: String, priceChangePercentageOneDay: String, isPriceChangePositive: Bool) {
+    private func setupCoinPriceChangeLabel(with priceChangeOneDay: String,
+                                           priceChangePercentageOneDay: String,
+                                           isPriceChangePositive: Bool) {
         let attributedStr = NSMutableAttributedString(string: priceChangeOneDay + "  ")
-        attributedStr.append(NSAttributedString(string: priceChangePercentageOneDay,
-                                                attributes: [.foregroundColor: isPriceChangePositive ? UIColor.green : UIColor.red]))
+        attributedStr.append(NSAttributedString(
+            string: priceChangePercentageOneDay,
+            attributes: [.foregroundColor: isPriceChangePositive ? UIColor.green : UIColor.red])
+        )
         coinPriceChangeLabel.attributedText = attributedStr
         
     }

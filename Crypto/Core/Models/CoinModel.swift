@@ -14,7 +14,7 @@ struct CoinModel: Codable {
     let image: String?
     let currentPrice: Double?
     let priceChangePercentageOneDay: Double?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case symbol

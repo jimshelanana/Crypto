@@ -18,12 +18,13 @@ protocol SearchMarketListDataStore {
 
 final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMarketListDataStore {
     
-    // MARK: - Public Properties
-    
+    // MARK: - Properties
     var presenter: SearchMarketListPresentationLogic?
     lazy var worker: SearchMarketListWorkingLogic = SearchMarketListWorker()
+    
+    // MARK: - DataStore Properties
     var selectedCoin: String?
-
+    
     // MARK: - Business Logic
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async {
         presenter?.presentIsLoading(true)

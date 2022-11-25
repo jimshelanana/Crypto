@@ -30,12 +30,12 @@ final class SearchMarketListView: UIView {
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-      let activityIndicator = UIActivityIndicatorView()
-      activityIndicator.style = .large
-      activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-      activityIndicator.hidesWhenStopped = true
-      return activityIndicator
-  }()
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     // MARK: - Init
     override init(frame: CGRect = CGRect.zero) {
@@ -51,10 +51,10 @@ final class SearchMarketListView: UIView {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Private Methods
     private func setup() {
-        setupUI()
+        setupView()
         addSubviews()
         addConstraints()
         setupTableView()
@@ -63,10 +63,11 @@ final class SearchMarketListView: UIView {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(SearchMarketListCell.self, forCellReuseIdentifier: Constants.CellName.searchCoin.rawValue)
+        tableView.register(SearchMarketListCell.self,
+                           forCellReuseIdentifier: Constants.CellName.searchCoin.rawValue)
     }
     
-    private func setupUI() {
+    private func setupView() {
         backgroundColor = UIColor(named: Constants.Colors.accentColor.rawValue)
     }
     

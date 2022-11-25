@@ -18,6 +18,6 @@ final class SearchMarketListWorker: SearchMarketListWorkingLogic {
     
     // MARK: - Working Logic
     func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async -> Result<SearchModel, RequestError> {
-        return await cryptoService.getSearchForMarket(for: request.searchWord)
+        await cryptoService.getSearchForMarket(for: request.searchWord)
     }
 }

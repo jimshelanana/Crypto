@@ -11,27 +11,28 @@ protocol CryptoServiceable {
     func getMarkets(coinRequestModel: CoinRequestModel) async -> Result<[CoinModel], RequestError>
     func getSearchForMarket(for searchWord: String) async -> Result<SearchModel, RequestError>
     func getCoinDetail(for id: String) async -> Result<CoinDetailModel, RequestError>
-    func getTrendingCoins() async -> Result<TrendingCoins, RequestError> 
+    func getTrendingCoins() async -> Result<TrendingCoins, RequestError>
 }
 
+// MARK: - CryptoService
 struct CryptoService: HTTPClient, CryptoServiceable {
     func getMarkets(coinRequestModel: CoinRequestModel) async -> Result<[CoinModel], RequestError> {
-        return await sendRequest(endpoint: CryptoEndpoint.markets(coinRequestModel),
-                                 responseModel: [CoinModel].self)
+        await sendRequest(endpoint: CryptoEndpoint.markets(coinRequestModel),
+                          responseModel: [CoinModel].self)
     }
     
     func getSearchForMarket(for searchWord: String) async -> Result<SearchModel, RequestError> {
-        return await sendRequest(endpoint: CryptoEndpoint.search(searchWord),
-                                 responseModel: SearchModel.self)
+        await sendRequest(endpoint: CryptoEndpoint.search(searchWord),
+                          responseModel: SearchModel.self)
     }
     
     func getCoinDetail(for id: String) async -> Result<CoinDetailModel, RequestError> {
-        return await sendRequest(endpoint: CryptoEndpoint.detail(id),
-                                 responseModel: CoinDetailModel.self)
+        await sendRequest(endpoint: CryptoEndpoint.detail(id),
+                          responseModel: CoinDetailModel.self)
     }
     
     func getTrendingCoins() async -> Result<TrendingCoins, RequestError> {
-        return await sendRequest(endpoint: CryptoEndpoint.trending,
-                                 responseModel: TrendingCoins.self)
+        await sendRequest(endpoint: CryptoEndpoint.trending,
+                          responseModel: TrendingCoins.self)
     }
 }

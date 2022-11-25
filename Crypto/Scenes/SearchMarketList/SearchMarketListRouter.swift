@@ -17,7 +17,7 @@ protocol SearchMarketListDataPassing {
 
 final class SearchMarketListRouter: SearchMarketListRoutingLogic, SearchMarketListDataPassing {
     
-    // MARK: - Public Properties
+    // MARK: - Properties
     weak var viewController: SearchMarketListViewController?
     var dataStore: SearchMarketListDataStore?
     

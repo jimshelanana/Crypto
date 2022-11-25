@@ -8,6 +8,8 @@
 import UIKit
 
 enum CoinDetailModels {
+    
+    // MARK: - CoinDetail
     enum CoinDetail {
         struct Request {
             let id: String
@@ -31,6 +33,7 @@ enum CoinDetailModels {
         }
     }
     
+    // MARK: - Trending
     enum Trending {
         struct Request {
         }
@@ -47,15 +50,17 @@ enum CoinDetailModels {
         }
     }
     
+    // MARK: - SelectLink
     enum SelectLink {
-      struct Request {
-        let link: String
-      }
+        struct Request {
+            let link: String
+        }
     }
     
+    // MARK: - SelectCoin
     enum SelectCoin {
-      struct Request {
-        let id: String
-      }
+        struct Request {
+            let id: String
+        }
     }
 }

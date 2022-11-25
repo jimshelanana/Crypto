@@ -19,10 +19,10 @@ final class CoinDetailWorker: CoinDetailWorkingLogic {
     
     // MARK: - Working Logic
     func fetchCoinDetail(for request: CoinDetailModels.CoinDetail.Request) async -> Result<CoinDetailModel, RequestError> {
-        return await cryptoService.getCoinDetail(for: request.id)
+        await cryptoService.getCoinDetail(for: request.id)
     }
     
     func fetchTrendingCoins() async -> Result<TrendingCoins, RequestError> {
-        return await cryptoService.getTrendingCoins()
+        await cryptoService.getTrendingCoins()
     }
 }

@@ -21,12 +21,15 @@ final class MarketListPresenter: MarketListPresentationLogic {
     
     // MARK: - Presentation Logic
     func presentData(_ response: MarketListModels.CoinList.Response) {
-        viewController?.displayMarketList(MarketListModels.CoinList.ViewModel(marketListCellModel:
-                                                                                    getMarketListCellModel(response.list)))
+        viewController?.displayMarketList(MarketListModels.CoinList.ViewModel(
+            marketListCellModel: getMarketListCellModel(response.list)
+        ))
     }
     
     func presentPrefetchedData(_ response: MarketListModels.CoinList.Response) {
-        viewController?.displayPrefetchedMarketList(MarketListModels.CoinList.ViewModel(marketListCellModel: getMarketListCellModel(response.list)))
+        viewController?.displayPrefetchedMarketList(MarketListModels.CoinList.ViewModel(
+            marketListCellModel: getMarketListCellModel(response.list)
+        ))
     }
     
     func presentServiceCallError(error: RequestError) {

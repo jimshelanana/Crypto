@@ -80,15 +80,15 @@ final class MarketListCell: UITableViewCell {
         coinPriceChangeLabel.text = nil
         coinIcon.image = nil
     }
-
+    
     // MARK: - Setup
     private func setup() {
-        setupUI()
+        setupView()
         addSubviews()
         addConstraints()
     }
     
-    private func setupUI() {
+    private func setupView() {
         selectionStyle = .none
     }
     

@@ -316,6 +316,7 @@
 		714CD8012925898F005F4CF4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				71E539E32930E02E00D65419 /* Extensions */,
 				7170B4E42927F303006F03A7 /* Stores */,
 				712E00EF2925728000F6998F /* Services */,
 				712E00F229257EBA00F6998F /* Models */,
@@ -351,8 +352,6 @@
 		7170B4E72927FE78006F03A7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7170B4E82927FE8B006F03A7 /* Double+Extension.swift */,
-				71D66000292E7E310058D5CC /* String+Extension.swift */,
 				71E539E1292FC37900D65419 /* Constants.swift */,
 			);
 			path = Helpers;
@@ -424,6 +423,15 @@
 				71E539D9292FBB4B00D65419 /* MarketListPresenterTests.swift */,
 			);
 			path = MarketList;
+			sourceTree = "<group>";
+		};
+		71E539E32930E02E00D65419 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7170B4E82927FE8B006F03A7 /* Double+Extension.swift */,
+				71D66000292E7E310058D5CC /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

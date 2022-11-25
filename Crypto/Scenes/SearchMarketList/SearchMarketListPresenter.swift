@@ -14,7 +14,7 @@ protocol SearchMarketListPresentationLogic {
 
 final class SearchMarketListPresenter: SearchMarketListPresentationLogic {
     
-    // MARK: - Public Properties
+    // MARK: - Properties
     weak var viewController: SearchMarketListDisplayLogic?
     
     // MARK: - Presentation Logic

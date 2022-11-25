@@ -29,7 +29,7 @@ struct CoinDetailModel: Codable {
     struct Image: Codable {
         let small: String?
     }
-
+    
     struct Links: Codable {
         let homepage: [String]?
     }

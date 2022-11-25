@@ -62,15 +62,15 @@ final class TrendingCoinListCell: UICollectionViewCell {
         nameLabel.text = nil
         iconImageView.image = nil
     }
-
+    
     // MARK: - Setup
     private func setup() {
-        setupUI()
+        setupView()
         addSubviews()
         addConstraints()
     }
     
-    private func setupUI() {
+    private func setupView() {
         contentView.layer.cornerRadius = 16
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.systemGray.cgColor

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - CryptoEndpoint
 enum CryptoEndpoint {
     case markets(CoinRequestModel)
     case search(String)
@@ -42,7 +43,7 @@ extension CryptoEndpoint: Endpoint {
         }
     }
     
-    var query: [String : Any]? {
+    var query: [String: Any]? {
         switch self {
         case .markets(let model):
             return ["vs_currency": model.vsCurrency,

@@ -8,6 +8,8 @@
 import UIKit
 
 enum MarketListModels {
+    
+    // MARK: - CoinList
     enum CoinList {
         struct Request {
             let page: Int
@@ -22,9 +24,10 @@ enum MarketListModels {
         }
     }
     
+    // MARK: - SelectCoin
     enum SelectCoin {
-      struct Request {
-        let id: String
-      }
+        struct Request {
+            let id: String
+        }
     }
 }

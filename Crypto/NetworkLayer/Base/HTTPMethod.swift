@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - RequestMethod
 enum RequestMethod: String {
     case get = "GET"
     case post = "POST"

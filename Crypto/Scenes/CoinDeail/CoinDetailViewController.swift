@@ -19,7 +19,7 @@ final class CoinDetailViewController: UIViewController {
     // MARK: - Properties
     var interactor: CoinDetailBusinessLogic?
     var router: (CoinDetailRoutingLogic & CoinDetailDataPassing)?
-
+    
     private lazy var contentView: CoinDetailViewLogic = CoinDetailView(parentViewController: self)
     
     // MARK: - Init
@@ -71,7 +71,7 @@ final class CoinDetailViewController: UIViewController {
         requestToSelectTrendingCoin(by: id)
         router?.routeToCoinDetailPage()
     }
-
+    
     // MARK: - Private Method
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = UIColor(named: "PrimaryTextColor")

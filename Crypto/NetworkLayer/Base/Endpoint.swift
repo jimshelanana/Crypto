@@ -5,8 +5,7 @@
 //  Created by Nana Jimsheleishvili on 16.11.22.
 //
 
-import Foundation
-
+// MARK: - Endpoint
 protocol Endpoint {
     var scheme: String { get }
     var host: String { get }
@@ -19,10 +18,10 @@ protocol Endpoint {
 
 extension Endpoint {
     var scheme: String {
-        return "https"
+        "https"
     }
-
+    
     var host: String {
-        return "api.coingecko.com"
+        "api.coingecko.com"
     }
 }
