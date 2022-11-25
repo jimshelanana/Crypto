@@ -7,8 +7,9 @@
 
 import UIKit
 
-final class SearchMarketListCell: UITableViewCell {
+final class SearchMarketListCell: UITableViewCell, CellIdentifiable {
     // MARK: - Properties
+    static var identifier = String(describing: SearchMarketListCell.self)
     private let imageLoadService = ImageLoadService()
     
     // MARK: - Views
@@ -90,22 +91,6 @@ final class SearchMarketListCell: UITableViewCell {
     func configure(with model: MarketListCellModel) {
         coinTitleLabel.text = model.name
         coinSymbolLabel.text = model.symbol
-        loadImage(with: model.image)
-    }
-    
-    // MARK: - Private Methods
-    private func loadImage(with url: String?) {
-        imageLoadService.loadImage(with: url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.coinIcon.image = image
-                }
-            case .failure(_):
-                self.coinIcon.image = UIImage(systemName: Constants.Images.photo.rawValue)
-                self.coinIcon.tintColor = .gray
-            }
-        }
+        coinIcon.loadImage(from: model.image)
     }
 }

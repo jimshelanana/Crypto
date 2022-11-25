@@ -64,7 +64,7 @@ final class SearchMarketListView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(SearchMarketListCell.self,
-                           forCellReuseIdentifier: Constants.CellName.searchCoin.rawValue)
+                           forCellReuseIdentifier: SearchMarketListCell.identifier)
     }
     
     private func setupView() {
@@ -116,7 +116,7 @@ extension SearchMarketListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellName.searchCoin.rawValue) as? SearchMarketListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: SearchMarketListCell.identifier) as? SearchMarketListCell {
             cell.configure(with: model[indexPath.row])
             return cell
         }

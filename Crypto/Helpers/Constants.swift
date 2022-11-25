@@ -8,18 +8,12 @@
 import Foundation
 
 enum Constants {
-    enum CellName: String {
-        case marketList = "MarketListCell"
-        case searchCoin = "SearchMarketListCell"
-        case trendingCoins = "TrendingCoinListCell"
-    }
-    
     enum Colors: String {
         case accentColor = "AccentColor"
         case primary = "PrimaryTextColor"
     }
     
     enum Images: String {
-        case photo = "photo"
+        case photo
     }
 }

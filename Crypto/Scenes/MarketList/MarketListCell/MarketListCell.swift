@@ -7,8 +7,9 @@
 
 import UIKit
 
-final class MarketListCell: UITableViewCell {
+final class MarketListCell: UITableViewCell, CellIdentifiable {
     // MARK: - Properties
+    static var identifier = String(describing: MarketListCell.self)
     private let imageLoadService = ImageLoadService()
     
     // MARK: - Views
@@ -119,22 +120,6 @@ final class MarketListCell: UITableViewCell {
         coinPriceLabel.text = model.currentPrice
         coinPriceChangeLabel.text = model.priceChangePercentageOneDay
         coinPriceChangeLabel.textColor = model.isPriceChangePositive == true ? .green : .red
-        loadImage(with: model.image)
-    }
-    
-    // MARK: - Private Methods
-    private func loadImage(with url: String?) {
-        imageLoadService.loadImage(with: url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.coinIcon.image = image
-                }
-            case .failure(_):
-                self.coinIcon.image = UIImage(systemName: Constants.Images.photo.rawValue)
-                self.coinIcon.tintColor = .gray
-            }
-        }
+        coinIcon.loadImage(from: model.image)
     }
 }

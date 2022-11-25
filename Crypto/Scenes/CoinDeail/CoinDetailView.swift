@@ -181,7 +181,7 @@ final class CoinDetailView: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TrendingCoinListCell.self,
-                                forCellWithReuseIdentifier: Constants.CellName.trendingCoins.rawValue)
+                                forCellWithReuseIdentifier: TrendingCoinListCell.identifier)
     }
     
     private func addSubviews() {
@@ -243,20 +243,6 @@ final class CoinDetailView: UIView {
     }
     
     // MARK: - Private Methods
-    private func loadImage(with url: String?) {
-        imageLoadService.loadImage(with: url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.coinIcon.image = image
-                }
-            case .failure(_):
-                break
-            }
-        }
-    }
-    
     private func didTapWebViewButton() {
         guard let link else { return }
         parentViewController?.didTapLink(by: link)
@@ -283,7 +269,7 @@ extension CoinDetailView: CoinDetailViewLogic {
         coinPriceLabel.text = model.currentPriceInUSD
         link = model.link
         descriptionLabel.text = model.description
-        loadImage(with: model.image)
+        coinIcon.loadImage(from: model.image)
         websiteLinkButton.setTitle(model.link, for: .normal)
         setupCoinPriceChangeLabel(with: model.priceChangeOneDay,
                                   priceChangePercentageOneDay: model.priceChangePercentageOneDay,
@@ -317,7 +303,7 @@ extension CoinDetailView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellName.trendingCoins.rawValue, for: indexPath) as? TrendingCoinListCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCoinListCell.identifier, for: indexPath) as? TrendingCoinListCell {
             cell.configure(with: trendingCoinList[indexPath.row])
             return cell
         }

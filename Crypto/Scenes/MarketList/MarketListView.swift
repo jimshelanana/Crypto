@@ -66,8 +66,9 @@ final class MarketListView: UIView {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.register(MarketListCell.self,
-                           forCellReuseIdentifier: Constants.CellName.marketList.rawValue)
+                           forCellReuseIdentifier: MarketListCell.identifier)
     }
     
     private func setupView() {
@@ -88,8 +89,8 @@ final class MarketListView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
 }
@@ -128,7 +129,7 @@ extension MarketListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellName.marketList.rawValue) as? MarketListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: MarketListCell.identifier) as? MarketListCell {
             cell.configure(with: model[indexPath.row])
             return cell
         }

@@ -7,8 +7,9 @@
 
 import UIKit
 
-final class TrendingCoinListCell: UICollectionViewCell {
+final class TrendingCoinListCell: UICollectionViewCell, CellIdentifiable {
     // MARK: - Properties
+    static var identifier = String(describing: TrendingCoinListCell.self)
     private let imageLoadService = ImageLoadService()
     
     // MARK: - Views
@@ -96,22 +97,6 @@ final class TrendingCoinListCell: UICollectionViewCell {
     func configure(with model: CoinDetailModels.Trending.ViewModel) {
         nameLabel.text = model.name
         rankingLabel.text = model.marketRank
-        loadImage(with: model.image)
-    }
-    
-    // MARK: - Private Methods
-    private func loadImage(with url: String?) {
-        imageLoadService.loadImage(with: url) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.iconImageView.image = image
-                }
-            case .failure(_):
-                self.iconImageView.image = UIImage(systemName: Constants.Images.photo.rawValue)
-                self.iconImageView.tintColor = .gray
-            }
-        }
+        iconImageView.loadImage(from: model.image)
     }
 }
