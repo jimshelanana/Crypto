@@ -34,7 +34,7 @@ final class CoinDetailPresenter: CoinDetailPresentationLogic {
             priceChangeOneDay: priceChangeOneDay,
             priceChangePercentageOneDay: priceChangePercentageOneDay,
             isPriceChangePositive: response.detail.marketData?.priceChangePercentageOneDay?.sign == .plus,
-            description: response.detail.description?.en ?? ""
+            description: response.detail.description?.en?.htmlToString ?? ""
         )
         viewController?.displayCoinDetail(model)
     }

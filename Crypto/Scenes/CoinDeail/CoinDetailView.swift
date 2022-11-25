@@ -43,11 +43,31 @@ final class CoinDetailView: UIView {
         return stackView
     }()
     
-    private let coinButton: UIButton = {
-        let button = UIButton(configuration: .plain())
-        button.configuration?.imagePadding = 8
-        button.tintColor = UIColor(named: Constants.Colors.primary.rawValue)
-        return button
+    private let wrapperStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    private let titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        return stackView
+    }()
+    
+    private var coinIcon: UIImageView = {
+        let icon = UIImageView()
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        return icon
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 22)
+        return label
     }()
     
     private let coinPriceLabel: UILabel = {
@@ -168,7 +188,10 @@ final class CoinDetailView: UIView {
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(coinButton)
+        mainStackView.addArrangedSubview(wrapperStackView)
+        wrapperStackView.addArrangedSubview(titleStackView)
+        titleStackView.addArrangedSubview(coinIcon)
+        titleStackView.addArrangedSubview(nameLabel)
         mainStackView.addArrangedSubview(coinPriceLabel)
         mainStackView.addArrangedSubview(coinPriceChangeLabel)
         mainStackView.addArrangedSubview(websiteStackView)
@@ -185,8 +208,8 @@ final class CoinDetailView: UIView {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -226,7 +249,7 @@ final class CoinDetailView: UIView {
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
-                    self.coinButton.setImage(image, for: .normal)
+                    self.coinIcon.image = image
                 }
             case .failure(_):
                 break
@@ -245,20 +268,21 @@ final class CoinDetailView: UIView {
         let attributedStr = NSMutableAttributedString(string: priceChangeOneDay + "  ")
         attributedStr.append(NSAttributedString(
             string: priceChangePercentageOneDay,
-            attributes: [.foregroundColor: isPriceChangePositive ? UIColor.green : UIColor.red])
+            attributes: [.foregroundColor: isPriceChangePositive
+                         ? UIColor.green
+                         : UIColor.red])
         )
         coinPriceChangeLabel.attributedText = attributedStr
-        
     }
 }
 
 // MARK: - CoinDetailViewLogic
 extension CoinDetailView: CoinDetailViewLogic {
     func configure(with model: Model) {
-        coinButton.setTitle(model.name.uppercased(), for: .normal)
+        nameLabel.text = model.name.uppercased()
         coinPriceLabel.text = model.currentPriceInUSD
         link = model.link
-        descriptionLabel.text = model.description.htmlToString
+        descriptionLabel.text = model.description
         loadImage(with: model.image)
         websiteLinkButton.setTitle(model.link, for: .normal)
         setupCoinPriceChangeLabel(with: model.priceChangeOneDay,

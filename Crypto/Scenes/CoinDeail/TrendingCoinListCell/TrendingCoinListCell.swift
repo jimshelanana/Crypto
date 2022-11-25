@@ -29,22 +29,19 @@ final class TrendingCoinListCell: UICollectionViewCell {
     }()
     
     private let iconImageView: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     private let rankingLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.textAlignment = .center
         return label
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        return label
-    }()
+    private let nameLabel = UILabel()
     
     // MARK: - Init
     override init(frame: CGRect) {
