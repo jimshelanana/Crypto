@@ -15,7 +15,7 @@ protocol SearchMarketListViewLogic: UIView {
 final class SearchMarketListView: UIView {
     
     // MARK: - Properties
-    private var parentViewController: SearchMarketListViewController?
+    private weak var parentViewController: SearchMarketListViewController?
     private var model = [MarketListCellModel]()
     
     // MARK: - Views
@@ -117,7 +117,9 @@ extension SearchMarketListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SearchMarketListCell.identifier) as? SearchMarketListCell {
-            cell.configure(with: model[indexPath.row])
+            if model.indices.contains(indexPath.row)  {
+                cell.configure(with: model[indexPath.row])
+            }
             return cell
         }
         return UITableViewCell()

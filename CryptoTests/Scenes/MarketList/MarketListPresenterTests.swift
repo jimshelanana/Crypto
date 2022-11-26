@@ -10,13 +10,11 @@ import XCTest
 
 final class MarketListPresenterTests: XCTestCase {
     
-    // MARK: - Private Properties
-    
+    // MARK: - Properties
     private var sut: MarketListPresenter!
     private var viewController: MarketListDisplayLogicSpy!
     
     // MARK: - Lifecycle
-    
     override func setUp() {
         super.setUp()
         
@@ -36,7 +34,75 @@ final class MarketListPresenterTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Methods
+    func testPresentData() {
+        // given
+        let list = [
+            CoinModel(id: "bitcoin",
+                      symbol: nil,
+                      name: nil,
+                      image: nil,
+                      currentPrice: nil,
+                      priceChangePercentageOneDay: nil)
+        ]
+        let coinListModel = MarketListModels.CoinList.Response(list: list)
+        XCTAssertFalse(viewController.displayMarketListCalled)
+        
+        // when
+        sut.presentData(coinListModel)
+        
+        // then
+        XCTAssertTrue(viewController.displayMarketListCalled)
+        
+        XCTAssertEqual(viewController.marketListModel.first?.id, "bitcoin")
+        XCTAssertEqual(viewController.marketListModel.first?.name, "")
+    }
     
-    //
+    func testPresentPrefetchedData() {
+        // given
+        let list = [
+            CoinModel(id: nil,
+                      symbol: "btc",
+                      name: nil,
+                      image: nil,
+                      currentPrice: nil,
+                      priceChangePercentageOneDay: nil)
+        ]
+        let coinListModel = MarketListModels.CoinList.Response(list: list)
+        XCTAssertFalse(viewController.displayPrefetchedMarketListCalled)
+        
+        // when
+        sut.presentPrefetchedData(coinListModel)
+        
+        // then
+        XCTAssertTrue(viewController.displayPrefetchedMarketListCalled)
+        
+        XCTAssertEqual(viewController.marketListModel.first?.id, "")
+        XCTAssertEqual(viewController.marketListModel.first?.symbol, "BTC")
+    }
+    
+    func testPresentServiceCallError() {
+        // given
+        XCTAssertFalse(viewController.displayServiceCallErrorCalled)
+        
+        // when
+        sut.presentServiceCallError(error: .noResponse)
+        
+        // then
+        XCTAssertTrue(viewController.displayServiceCallErrorCalled)
+    }
+    
+    func testPresentIsLoading() {
+        // given
+        XCTAssertNil(viewController.isLoading)
+        XCTAssertFalse(viewController.displayIsLoadingCalled)
+        
+        // when
+        sut.presentIsLoading(true)
+        
+        // then
+        XCTAssertTrue(viewController.displayIsLoadingCalled)
+        
+        XCTAssertEqual(viewController.isLoading, true)
+    }
 }

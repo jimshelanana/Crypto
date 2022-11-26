@@ -17,7 +17,7 @@ final class CoinDetailView: UIView {
     typealias Model = CoinDetailModels.CoinDetail.ViewModel
     
     // MARK: - Properties
-    private var parentViewController: CoinDetailViewController?
+    private weak var parentViewController: CoinDetailViewController?
     private let imageLoadService = ImageLoadService()
     private var link: String?
     private var trendingCoinList = [CoinDetailModels.Trending.ViewModel]()

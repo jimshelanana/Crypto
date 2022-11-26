@@ -419,13 +419,10 @@
 		71E539D2292FBB3000D65419 /* MarketList */ = {
 			isa = PBXGroup;
 			children = (
-				71E539D3292FBB4B00D65419 /* MarketListViewControllerTests.swift */,
 				71E539D4292FBB4B00D65419 /* MarketListInteractorTests.swift */,
-				71E539D5292FBB4B00D65419 /* MarketListDisplayLogicSpy.swift */,
-				71E539D6292FBB4B00D65419 /* MarketListWorkingLogicSpy.swift */,
-				71E539D7292FBB4B00D65419 /* MarketListPresentationLogicSpy.swift */,
-				71E539D8292FBB4B00D65419 /* MarketListBusinessLogicSpy.swift */,
 				71E539D9292FBB4B00D65419 /* MarketListPresenterTests.swift */,
+				71E539D3292FBB4B00D65419 /* MarketListViewControllerTests.swift */,
+				71E539E92932AB7900D65419 /* Spies */,
 			);
 			path = MarketList;
 			sourceTree = "<group>";
@@ -446,6 +443,17 @@
 				71E539E529317B5900D65419 /* CellIdentifiable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		71E539E92932AB7900D65419 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				71E539D8292FBB4B00D65419 /* MarketListBusinessLogicSpy.swift */,
+				71E539D5292FBB4B00D65419 /* MarketListDisplayLogicSpy.swift */,
+				71E539D7292FBB4B00D65419 /* MarketListPresentationLogicSpy.swift */,
+				71E539D6292FBB4B00D65419 /* MarketListWorkingLogicSpy.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

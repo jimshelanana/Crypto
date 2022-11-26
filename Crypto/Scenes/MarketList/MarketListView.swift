@@ -16,7 +16,7 @@ protocol MarketListViewLogic: UIView {
 final class MarketListView: UIView {
     
     // MARK: - Properties
-    private var parentViewController: MarketListViewController?
+    private weak var parentViewController: MarketListViewController?
     private var model = [MarketListCellModel]()
     private var marketListPage = 1
     private var isLoadingData = true

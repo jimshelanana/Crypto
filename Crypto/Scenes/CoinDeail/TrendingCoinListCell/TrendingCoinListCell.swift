@@ -10,7 +10,6 @@ import UIKit
 final class TrendingCoinListCell: UICollectionViewCell, CellIdentifiable {
     // MARK: - Properties
     static var identifier = String(describing: TrendingCoinListCell.self)
-    private let imageLoadService = ImageLoadService()
     
     // MARK: - Views
     private let mainStackView: UIStackView = {

@@ -10,7 +10,6 @@ import UIKit
 final class MarketListCell: UITableViewCell, CellIdentifiable {
     // MARK: - Properties
     static var identifier = String(describing: MarketListCell.self)
-    private let imageLoadService = ImageLoadService()
     
     // MARK: - Views
     private let mainStackView: UIStackView = {
