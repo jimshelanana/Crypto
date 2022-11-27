@@ -23,7 +23,7 @@ class CryptoServiceTests: XCTestCase {
         
         switch failingResult {
         case .success(let coins):
-            XCTAssertEqual(coins[0].id, "bitcoin")
+            XCTAssertEqual(coins.first?.id, "bitcoin")
         case .failure:
             XCTFail("The request should not fail")
         }
@@ -35,7 +35,7 @@ class CryptoServiceTests: XCTestCase {
         
         switch failingResult {
         case .success(let coins):
-            XCTAssertEqual(coins.coins[0].id, "bitcoin")
+            XCTAssertEqual(coins.coins.first?.id, "bitcoin")
         case .failure:
             XCTFail("The request should not fail")
         }
@@ -59,7 +59,7 @@ class CryptoServiceTests: XCTestCase {
         
         switch failingResult {
         case .success(let coins):
-            XCTAssertEqual(coins.coins[0].item.id, "gains-network")
+            XCTAssertEqual(coins.coins.first?.item.id, "gains-network")
         case .failure:
             XCTFail("The request should not fail")
         }

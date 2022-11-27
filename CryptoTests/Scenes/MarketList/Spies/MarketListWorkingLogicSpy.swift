@@ -11,10 +11,12 @@ import Foundation
 final class MarketListWorkingLogicSpy: MarketListWorkingLogic {
     // MARK: - Properties
     var fetchMarketListCalled = false
+    var requestPage: Int?
 
     // MARK: - Methods
     func fetchMarketList(with request: Crypto.MarketListModels.CoinList.Request) async -> Result<[Crypto.CoinModel], Crypto.RequestError> {
         fetchMarketListCalled = true
+        requestPage = request.page
         return .success([])
     }
 }

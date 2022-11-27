@@ -28,7 +28,7 @@ final class CoinDetailPresenter: CoinDetailPresentationLogic {
             id: response.detail.id ?? "",
             name: response.detail.name ?? "",
             image: response.detail.image?.small ?? "",
-            link: response.detail.links?.homepage?[0] ?? "",
+            link: response.detail.links?.homepage?.first ?? "",
             currentPriceInUSD: currentPrice,
             marketCapRank: "\(response.detail.marketCapRank ?? 0)",
             priceChangeOneDay: priceChangeOneDay,

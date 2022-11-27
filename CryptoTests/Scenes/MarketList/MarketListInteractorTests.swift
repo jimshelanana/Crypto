@@ -10,14 +10,12 @@ import XCTest
 
 final class MarketListInteractorTests: XCTestCase {
     
-    // MARK: - Private Properties
-    
+    // MARK: - Properties
     private var sut: MarketListInteractor!
     private var worker: MarketListWorkingLogicSpy!
     private var presenter: MarketListPresentationLogicSpy!
     
     // MARK: - Lifecycle
-    
     override func setUp() {
         super.setUp()
         
@@ -41,7 +39,34 @@ final class MarketListInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Methods
+    func testFetchMarketList() async {
+        // given
+        let page = 1
+        let coinListRequest = MarketListModels.CoinList.Request(page: page)
+        XCTAssertFalse(worker.fetchMarketListCalled)
+        
+        // when
+        await sut.fetchMarketList(with: coinListRequest)
+        
+        // then
+        XCTAssertTrue(worker.fetchMarketListCalled)
+        XCTAssertTrue(presenter.presentDataCalled)
+        XCTAssertEqual(worker.requestPage, page)
+    }
     
-    //
+    func testPrefetchMarketList() async {
+        // given
+        let page = 2
+        let coinListRequest = MarketListModels.CoinList.Request(page: page)
+        XCTAssertFalse(worker.fetchMarketListCalled)
+        
+        // when
+        await sut.prefetchMarketList(with: coinListRequest)
+        
+        // then
+        XCTAssertTrue(worker.fetchMarketListCalled)
+        XCTAssertTrue(presenter.presentPrefetchedDataCalled)
+        XCTAssertEqual(worker.requestPage, page)
+    }
 }

@@ -22,14 +22,11 @@ final class MarketListViewControllerTests: XCTestCase {
         super.setUp()
         
         let mainWindow = UIWindow()
-        let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "MarketList", bundle: bundle)
-        
-        let viewController = storyboard.instantiateViewController(
-            identifier: "MarketListViewController") as? MarketListViewController
+
+        let viewController = MarketListViewController()
         let interactor = MarketListBusinessLogicSpy()
         
-        viewController?.interactor = interactor
+        viewController.interactor = interactor
         
         sut = viewController
         window = mainWindow
@@ -47,7 +44,27 @@ final class MarketListViewControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Methods
+    func testViewDidLoad() {
+        // when
+        sut.viewDidLoad()
+        
+        // then
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            XCTAssertTrue(self.interactor.fetchMarketListCalled)
+        }
+    }
     
-    //
+    func testStartPrefetching() async {
+        // given
+        let page = 3
+        XCTAssertFalse(interactor.prefetchMarketListCalled)
+        
+        // when
+        await sut.startPrefetching(for: page)
+        
+        // then
+        XCTAssertTrue(interactor.prefetchMarketListCalled)
+        XCTAssertEqual(interactor.selectedPage, page)
+    }
 }

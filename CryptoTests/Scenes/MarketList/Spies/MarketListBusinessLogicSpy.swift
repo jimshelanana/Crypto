@@ -13,6 +13,7 @@ final class MarketListBusinessLogicSpy: MarketListBusinessLogic {
     var fetchMarketListCalled = false
     var prefetchMarketListCalled = false
     var selectCoinCalled = false
+    var selectedPage: Int?
     
     // MARK: - Methods
     func fetchMarketList(with request: Crypto.MarketListModels.CoinList.Request) async {
@@ -21,6 +22,7 @@ final class MarketListBusinessLogicSpy: MarketListBusinessLogic {
     
     func prefetchMarketList(with request: Crypto.MarketListModels.CoinList.Request) async {
         prefetchMarketListCalled = true
+        selectedPage = request.page
     }
     
     func selectCoin(with request: Crypto.MarketListModels.SelectCoin.Request) {
