@@ -56,10 +56,7 @@ final class CoinDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        Task {
-            await showCoinDetail()
-            await showTrendingCoins()
-        }
+        interactor?.viewDidLoad()
     }
     
     func didTapLink(by link: String) {
@@ -76,19 +73,11 @@ final class CoinDetailViewController: UIViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = UIColor(named: "PrimaryTextColor")
     }
-    
-    private func showCoinDetail() async {
-        await interactor?.fetchCoinDetail()
-    }
-    
+
     private func requestToSelectLink(by link: String) {
         let request = CoinDetailModels.SelectLink.Request(link: link)
         
         interactor?.selectLink(with: request)
-    }
-    
-    private func showTrendingCoins() async {
-        await interactor?.fetchTrendingCoins()
     }
     
     private func requestToSelectTrendingCoin(by id: String) {
@@ -113,9 +102,7 @@ extension CoinDetailViewController: CoinDetailDisplayLogic {
     func displayServiceCallError(_ error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
-            Task {
-                await self?.showCoinDetail()
-            }
+            self?.interactor?.didTapAlertButton()
         }))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)

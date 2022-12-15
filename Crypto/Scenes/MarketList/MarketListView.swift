@@ -18,7 +18,6 @@ final class MarketListView: UIView {
     // MARK: - Properties
     private weak var parentViewController: MarketListViewController?
     private var model = [MarketListCellModel]()
-    private var marketListPage = 1
     private var isLoadingData = true
     
     // MARK: - Views
@@ -146,11 +145,8 @@ extension MarketListView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > tableView.contentSize.height - 200 - scrollView.frame.size.height && isLoadingData == false {
-            marketListPage += 1
             isLoadingData = true
-            Task {
-                await parentViewController?.startPrefetching(for: marketListPage)
-            }
+            parentViewController?.didScrollToBottom()
         }
     }
     

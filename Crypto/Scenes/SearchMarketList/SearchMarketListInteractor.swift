@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SearchMarketListBusinessLogic {
-    func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async
+    func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request)
     func selectCoin(with request: SearchMarketListModels.SelectCoin.Request)
 }
 
@@ -26,17 +26,19 @@ final class SearchMarketListInteractor: SearchMarketListBusinessLogic, SearchMar
     var selectedCoin: String?
     
     // MARK: - Business Logic
-    func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) async {
+    func fetchSearchMarketList(with request: SearchMarketListModels.CoinList.Request) {
         presenter?.presentIsLoading(true)
         defer { presenter?.presentIsLoading(false) }
         
-        let searchList = await worker.fetchSearchMarketList(with: request)
-        switch searchList {
-        case .success(let data):
-            let model = SearchMarketListModels.CoinList.Response(list: data)
-            presenter?.presentSearchData(model)
-        case .failure(_):
-            break
+        Task {
+            let searchList = await worker.fetchSearchMarketList(with: request)
+            switch searchList {
+            case .success(let data):
+                let model = SearchMarketListModels.CoinList.Response(list: data)
+                presenter?.presentSearchData(model)
+            case .failure(_):
+                break
+            }
         }
     }
     

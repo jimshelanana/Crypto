@@ -51,10 +51,6 @@ final class SearchMarketListViewController: UIViewController {
         view = contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func didSelectRow(for id: String) {
         requestToSelectCoin(by: id)
         router?.routeToCoinDetail()
@@ -80,9 +76,7 @@ extension SearchMarketListViewController: SearchMarketListDisplayLogic {
 extension SearchMarketListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
-            Task {
-                await interactor?.fetchSearchMarketList(with: SearchMarketListModels.CoinList.Request(searchWord: searchText))
-            }
+            interactor?.fetchSearchMarketList(with: SearchMarketListModels.CoinList.Request(searchWord: searchText))
         }
     }
     

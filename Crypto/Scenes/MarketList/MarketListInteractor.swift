@@ -8,8 +8,9 @@
 import Foundation
 
 protocol MarketListBusinessLogic {
-    func fetchMarketList(with request: MarketListModels.CoinList.Request) async
-    func prefetchMarketList(with request: MarketListModels.CoinList.Request) async
+    func viewDidLoad()
+    func didTapAlertButton()
+    func didScrollToBottom()
     func selectCoin(with request: MarketListModels.SelectCoin.Request)
 }
 
@@ -22,19 +23,38 @@ final class MarketListInteractor: MarketListBusinessLogic, MarketListDataStore {
     // MARK: - Properties
     var presenter: MarketListPresentationLogic?
     lazy var worker: MarketListWorkingLogic = MarketListWorker()
+    private var marketListPage = 1
     
     // MARK: - DataStore Properties
     var selectedCoin: String?
     
     // MARK: - Business Logic
-    func fetchMarketList(with request: MarketListModels.CoinList.Request) async {
-        guard let response = await getMarketList(for: request) else { return }
-        presenter?.presentData(response)
+    func viewDidLoad() {
+        let request = MarketListModels.CoinList.Request(page: 1)
+        fetchMarketList(with: request)
     }
     
-    func prefetchMarketList(with request: MarketListModels.CoinList.Request) async {
-        guard let response = await getMarketList(for: request) else { return }
-        presenter?.presentPrefetchedData(response)
+    func didTapAlertButton() {
+        let request = MarketListModels.CoinList.Request(page: 1)
+        fetchMarketList(with: request)
+    }
+    
+    private func fetchMarketList(with request: MarketListModels.CoinList.Request) {
+        Task {
+            let response = await getMarketList(for: request)
+            guard let response else { return }
+            presenter?.presentData(response)
+        }
+    }
+    
+    func didScrollToBottom() {
+        marketListPage += 1
+        let request = MarketListModels.CoinList.Request(page: marketListPage)
+        Task {
+            let response = await getMarketList(for: request)
+            guard let response else { return }
+            presenter?.presentPrefetchedData(response)
+        }
     }
     
     func selectCoin(with request: MarketListModels.SelectCoin.Request) {

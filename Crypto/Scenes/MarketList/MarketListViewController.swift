@@ -59,13 +59,11 @@ final class MarketListViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationItems()
         setupSearchController()
-        Task {
-            await showMarketList()
-        }
+        interactor?.viewDidLoad()
     }
     
-    func startPrefetching(for page: Int) async {
-        await interactor?.prefetchMarketList(with: MarketListModels.CoinList.Request(page: page))
+    func didScrollToBottom() {
+        interactor?.didScrollToBottom()
     }
     
     func tableViewDidStartScrolling() {
@@ -88,12 +86,6 @@ final class MarketListViewController: UIViewController {
         searchController.searchResultsUpdater = searchMarketListViewController
     }
     
-    private func showMarketList() async {
-        let request = MarketListModels.CoinList.Request(page: 1)
-        
-        await interactor?.fetchMarketList(with: request)
-    }
-    
     private func requestToSelectCoin(by id: String) {
         let request = MarketListModels.SelectCoin.Request(id: id)
         
@@ -114,9 +106,7 @@ extension MarketListViewController: MarketListDisplayLogic {
     func displayServiceCallError(_ error: String) {
         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
-            Task {
-                await self?.showMarketList()
-            }
+            self?.interactor?.didTapAlertButton()
         }))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)

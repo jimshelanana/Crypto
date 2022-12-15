@@ -8,9 +8,9 @@
 import Foundation
 
 protocol CoinDetailBusinessLogic {
-    func fetchCoinDetail() async
+    func viewDidLoad()
+    func didTapAlertButton()
     func selectLink(with request: CoinDetailModels.SelectLink.Request)
-    func fetchTrendingCoins() async
     func selectedTrendingCoin(with request: CoinDetailModels.SelectCoin.Request)
 }
 
@@ -30,11 +30,26 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
     var selectedLink: String?
     
     // MARK: - Business Logic
-    func fetchCoinDetail() async {
+    func viewDidLoad() {
+        Task {
+            await fetchCoinDetail()
+            await fetchTrendingCoins()
+        }
+    }
+    
+    func didTapAlertButton() {
+        Task {
+            await fetchCoinDetail()
+        }
+    }
+    
+    private func fetchCoinDetail() async {
         guard let selectedCoin else { return }
         presenter?.presentIsLoading(true)
         defer { presenter?.presentIsLoading(false) }
+        
         let coinDetail = await worker.fetchCoinDetail(for: .init(id: selectedCoin))
+        
         switch coinDetail {
         case .success(let data):
             let model = CoinDetailModels.CoinDetail.Response(detail: data)
@@ -48,7 +63,7 @@ final class CoinDetailInteractor: CoinDetailBusinessLogic, CoinDetailDataStore {
         selectedLink = request.link
     }
     
-    func fetchTrendingCoins() async {
+    private func fetchTrendingCoins() async {
         let trendingCoins = await worker.fetchTrendingCoins()
         switch trendingCoins {
         case .success(let data):

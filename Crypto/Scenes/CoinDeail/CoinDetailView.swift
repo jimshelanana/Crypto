@@ -130,7 +130,10 @@ final class CoinDetailView: UIView {
         fl.scrollDirection = .horizontal
         fl.itemSize = CGSize(width: 152,
                              height: 92)
-        fl.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        fl.sectionInset = UIEdgeInsets(top: 0,
+                                       left: 12,
+                                       bottom: 0,
+                                       right: 12)
         return fl
     }()
     
@@ -180,8 +183,10 @@ final class CoinDetailView: UIView {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(TrendingCoinListCell.self,
-                                forCellWithReuseIdentifier: TrendingCoinListCell.identifier)
+        collectionView.register(
+            TrendingCoinListCell.self,
+            forCellWithReuseIdentifier: TrendingCoinListCell.identifier
+        )
     }
     
     private func addSubviews() {
@@ -248,15 +253,17 @@ final class CoinDetailView: UIView {
         parentViewController?.didTapLink(by: link)
     }
     
-    private func setupCoinPriceChangeLabel(with priceChangeOneDay: String,
-                                           priceChangePercentageOneDay: String,
-                                           isPriceChangePositive: Bool) {
+    private func setupCoinPriceChangeLabel(
+        with priceChangeOneDay: String,
+        priceChangePercentageOneDay: String,
+        isPriceChangePositive: Bool
+    ) {
         let attributedStr = NSMutableAttributedString(string: priceChangeOneDay + "  ")
         attributedStr.append(NSAttributedString(
             string: priceChangePercentageOneDay,
             attributes: [.foregroundColor: isPriceChangePositive
                          ? UIColor.green
-                         : UIColor.red])
+                                         : UIColor.red])
         )
         coinPriceChangeLabel.attributedText = attributedStr
     }
